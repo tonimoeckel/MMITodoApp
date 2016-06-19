@@ -1,4 +1,28 @@
 <resources>
     <string name="app_name">MMI Todo App</string>
     <string name="action_settings">Settings</string>
+    <string name="hint_title">Your title</string>
+    <string name="label_title">Title</string>
+    <string name="hint_text">Some text</string>
+    <string name="label_text">Description</string>
+    <string name="hint_done">Done</string>
+    <string name="label_done">Done</string>
+    <string name="section_done">Done</string>
+    <string name="section_customized">Customized</string>
+    <string name="section_due">Due</string>
+    <string name="hint_due_date">Date</string>
+    <string name="label_due_date">Date</string>
+    <string name="hint_due_time">Time</string>
+    <string name="label_due_time">Time</string>
+    <string name="label_favorite">Favorite</string>
+    <string name="section_more">More</string>
+    <string name="label_no_data">No Data</string>
+    <string name="label_email">Email</string>
+    <string name="hint_email">Please enter your email</string>
+    <string name="validation_invalid_password">Password not valid</string>
+    <string name="label_password">Password</string>
+    <string name="label_login">Login</string>
+    <string name="action_login">Login</string>
+    <string name="activity_login">Login</string>
+    <string name="icon">icon</string>
 </resources>
