@@ -7,8 +7,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.model.LoginForm;
@@ -19,10 +22,12 @@ import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
 import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
 import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.RowValidationError;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 
 /**
@@ -35,12 +40,19 @@ public class LoginActivity extends ListActivity implements OnFormRowValueChanged
     private LoginForm mLoginForm;
     private FormManager mFormManager;
     private FormDescriptor mFormDescriptor;
+    private TextView mValidationTextView;
+    private ProgressBar mProgressBar;
+
+    private RowDescriptor mButtonDescriptor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
+
+        mValidationTextView = (TextView) findViewById(R.id.validationTextView);
+        mProgressBar = (ProgressBar) findViewById(android.R.id.progress);
 
         setupForm();
     }
@@ -53,7 +65,9 @@ public class LoginActivity extends ListActivity implements OnFormRowValueChanged
         mFormDescriptor = factory.createFormDescriptorFromAnnotatedClass(mLoginForm);
 
         SectionDescriptor buttonSection = SectionDescriptor.newInstance("button");
-        buttonSection.addRow(RowDescriptor.newInstance("login", RowDescriptor.FormRowDescriptorTypeButton, getString(R.string.label_login)));
+        mButtonDescriptor = RowDescriptor.newInstance("login", RowDescriptor.FormRowDescriptorTypeButton, getString(R.string.label_login));
+        mButtonDescriptor.setDisabled(true);
+        buttonSection.addRow(mButtonDescriptor);
         mFormDescriptor.addSection(buttonSection);
 
         mFormManager = new FormManager();
@@ -68,14 +82,42 @@ public class LoginActivity extends ListActivity implements OnFormRowValueChanged
     public void onValueChanged(RowDescriptor rowDescriptor, Value<?> oldValue, Value<?> newValue) {
 
 
-        try {
-            Field field = mLoginForm.getClass().getField(rowDescriptor.getTag());
-            field.set(mLoginForm, newValue.getValue());
+        if (rowDescriptor.isValid()){
 
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
+            try {
+                Field field = mLoginForm.getClass().getField(rowDescriptor.getTag());
+                field.set(mLoginForm, newValue.getValue());
+
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
 
+        List<RowValidationError> valdationErrors = mFormDescriptor.getFormValidation(this)
+                .getRowValidationErrors();
+        showValidationText(valdationErrors);
+        mButtonDescriptor.setDisabled(valdationErrors.size() > 0);
+        mFormManager.updateRows();
+
+    }
+
+    private void showValidationText(List<RowValidationError> validationErrors) {
+
+        if (validationErrors.size() > 0){
+            if (mValidationTextView.getVisibility() != View.VISIBLE){
+                mValidationTextView.setVisibility(View.VISIBLE);
+            }
+
+            RowValidationError rowValidationError = validationErrors.get(0);
+            mValidationTextView.setText(rowValidationError.getMessage(this));
+        }else {
+            hideValidationText();
+        }
+
+    }
+
+    private void hideValidationText() {
+        mValidationTextView.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -91,6 +133,8 @@ public class LoginActivity extends ListActivity implements OnFormRowValueChanged
     }
 
     private void processLogin(LoginForm loginForm) {
+
+        Log.d(TAG, "processLogin");
 
     }
 }

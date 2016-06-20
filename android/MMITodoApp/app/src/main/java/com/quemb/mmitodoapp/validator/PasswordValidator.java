@@ -12,7 +12,7 @@ import com.quemb.qmbform.descriptor.Value;
 
 
 public class PasswordValidator implements FormValidator {
-    private static final String PASSWORD_PATTERN = "^[0-9]{1,6}$";
+    private static final String PASSWORD_PATTERN = "^[0-9]{6}$";
 
     @Override
     public RowValidationError validate(RowDescriptor descriptor) {

@@ -184,6 +184,7 @@ public class RowDescriptor<T> extends FormItemDescriptor {
 
     public void setDisabled(Boolean disabled) {
         mDisabled = disabled;
+
     }
 
     public void setHint(int hint) {
