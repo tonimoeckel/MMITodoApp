@@ -25,4 +25,15 @@
     <string name="action_login">Login</string>
     <string name="activity_login">Login</string>
     <string name="icon">icon</string>
+    <string name="label_connection_settings">Connection Settings</string>
+    <string name="label_protocol">Protocol</string>
+    <string name="hint_protocol">Protocol</string>
+    <string name="hint_host">localhost</string>
+    <string name="hint_port">80</string>
+    <string name="label_port">Port</string>
+    <string name="label_host">Host</string>
+    <string name="label_save">Save</string>
+    <string name="label_test_connection">Test Connection</string>
+    <string name="txt_reachable">Connection successful</string>
+    <string name="txt_not_reachable">Not connected</string>
 </resources>
