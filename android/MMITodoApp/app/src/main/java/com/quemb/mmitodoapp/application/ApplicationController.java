@@ -7,6 +7,8 @@ import com.quemb.mmitodoapp.network.ToDoService;
 
 import android.app.Application;
 
+import java.net.MalformedURLException;
+
 import retrofit2.Retrofit;
 
 /**
@@ -26,7 +28,7 @@ public class ApplicationController extends SugarApp {
         super.onCreate();
         sharedInstance = this;
 
-        ConnectionSettingFactory.getSharedPreferencesSetting(getBaseContext());
+        ConnectionSettingFactory.getSharedPreferencesSetting(getApplicationContext());
     }
 
     public static synchronized ApplicationController getSharedInstance() {
@@ -53,6 +55,15 @@ public class ApplicationController extends SugarApp {
 
 
     public ToDoService getToDoService() {
+
+        if (mToDoService == null){
+            ConnectionSetting connectionSetting = ConnectionSettingFactory.getSharedPreferencesSetting(getApplicationContext());
+            try {
+                mToDoService = createToDoService(connectionSetting.getURL().toString());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
         return mToDoService;
     }
 }

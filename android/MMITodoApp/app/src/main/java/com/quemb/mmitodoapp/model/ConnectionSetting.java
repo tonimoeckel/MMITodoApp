@@ -56,4 +56,8 @@ public class ConnectionSetting implements FormElementDelegate {
         //return new URL(protocol.toLowerCase(), host, port, null);
     }
 
+    public boolean isValid() {
+
+        return protocol != null && !protocol.isEmpty() && host != null && !host.isEmpty() && port != null && port != 0;
+    }
 }

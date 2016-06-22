@@ -1,13 +1,11 @@
 package com.quemb.mmitodoapp.model;
 
-import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.application.ApplicationController;
-import com.quemb.qmbform.annotation.FormElement;
-import com.quemb.qmbform.descriptor.RowDescriptor;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import java.net.MalformedURLException;
 
@@ -22,21 +20,21 @@ public class ConnectionSettingFactory {
     private static final String SP_KEY_HOST = "SP_KEY_HOST";
     private static final String SP_KEY_PORT = "SP_KEY_PORT";
 
-    public static ConnectionSetting getSharedPreferencesSetting(Activity activity){
+    public static ConnectionSetting getSharedPreferencesSetting(Context context){
 
-        
-        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         ConnectionSetting connectionSetting = new ConnectionSetting();
         connectionSetting.protocol = sharedPref.getString(SP_KEY_PROTOCOL, "HTTP");
-        connectionSetting.host = sharedPref.getString(SP_KEY_HOST, "localhost");
+        connectionSetting.host = sharedPref.getString(SP_KEY_HOST, null);
         connectionSetting.port = sharedPref.getInt(SP_KEY_PORT, 80);
 
         return connectionSetting;
     }
 
-    public static void putSharedPreferencesSetting(ConnectionSetting connectionSetting, Activity activity){
+    public static void putSharedPreferencesSetting(ConnectionSetting connectionSetting, Context context){
 
-        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(SP_KEY_PROTOCOL, connectionSetting.protocol);
         editor.putString(SP_KEY_HOST, connectionSetting.host);
@@ -51,4 +49,10 @@ public class ConnectionSettingFactory {
 
     }
 
+    public static boolean isValid(Context context) {
+
+        ConnectionSetting connectionSetting = getSharedPreferencesSetting(context);
+        return connectionSetting.isValid();
+
+    }
 }

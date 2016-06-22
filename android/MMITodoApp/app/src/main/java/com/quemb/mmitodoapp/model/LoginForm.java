@@ -13,6 +13,7 @@ import com.quemb.qmbform.descriptor.RowDescriptor;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 /**
  * Created by tonimockel on 19.06.16.
@@ -30,9 +31,9 @@ public class LoginForm {
     public String pwd;
 
 
-    public void save(Activity activity) {
+    public void save(Context context) {
 
-        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
 
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(SP_KEY_EMAIL, email);
