@@ -28,7 +28,7 @@ public class ToDo extends SugarRecord {
     @FormElement(required = true, hint = R.string.hint_done, sortId = 10, tag = "done", label = R.string.label_done, rowDescriptorType = RowDescriptor.FormRowDescriptorTypeBooleanCheck, section = R.string.section_due)
     public Boolean done = false;
 
-    @FormElement(required = true, hint = R.string.hint_due_date, sortId = 15, tag = "done", label = R.string.label_due_date, rowDescriptorType = RowDescriptor.FormRowDescriptorTypeDatePicker, section = R.string.section_due)
+    @FormElement(required = true, hint = R.string.hint_due_date, sortId = 15, tag = "date", label = R.string.label_due_date, rowDescriptorType = RowDescriptor.FormRowDescriptorTypeDatePicker, section = R.string.section_due)
     public Date date = new Date();
 
     @FormElement(required = true, hint = R.string.hint_due_time, sortId = 15, tag = "time", label = R.string.label_due_time, rowDescriptorType = RowDescriptor.FormRowDescriptorTypeTime, section = R.string.section_due)

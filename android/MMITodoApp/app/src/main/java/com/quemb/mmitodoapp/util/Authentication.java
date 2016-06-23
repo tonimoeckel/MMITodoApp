@@ -20,4 +20,16 @@ public class Authentication {
         return sharedPref.getBoolean(SP_KEY_IS_AUTHENTICATED, false);
         
     }
+
+    public static void setAuthenticated(Context context){
+
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(SP_KEY_IS_AUTHENTICATED, true);
+
+        editor.commit();
+
+
+    }
 }

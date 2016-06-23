@@ -10,6 +10,7 @@ import android.app.Application;
 import java.net.MalformedURLException;
 
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by tonimoeckel on 21.06.16.
@@ -39,6 +40,7 @@ public class ApplicationController extends SugarApp {
 
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 

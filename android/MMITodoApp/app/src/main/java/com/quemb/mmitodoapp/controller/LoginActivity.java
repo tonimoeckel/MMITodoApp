@@ -19,6 +19,7 @@ import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.application.ApplicationController;
 import com.quemb.mmitodoapp.model.LoginForm;
 import com.quemb.mmitodoapp.network.ToDoService;
+import com.quemb.mmitodoapp.util.Authentication;
 import com.quemb.qmbform.FormManager;
 import com.quemb.qmbform.OnFormRowClickListener;
 import com.quemb.qmbform.annotation.FormDescriptorAnnotationFactory;
@@ -189,6 +190,7 @@ public class LoginActivity extends ListActivity implements OnFormRowValueChanged
 
                 if (response.body()){
                     LoginActivity.this.saveLoginData();
+                    Authentication.setAuthenticated(LoginActivity.this);
                 }
             }
 
