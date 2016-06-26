@@ -27,6 +27,8 @@ public class StartActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         ConnectionSetting connectionSetting = ConnectionSettingFactory.getSharedPreferencesSetting(this);
+
+/**
         if (!connectionSetting.isValid()) {
             startIntent(new Intent(this, ConnectionSettingsActivity.class));
         } else {
@@ -56,7 +58,8 @@ public class StartActivity extends Activity {
             }
 
         }
-
+         **/
+        startIntent(new Intent(this, TodoListActivity.class));
     }
 
     private void startIntent(Intent intent){

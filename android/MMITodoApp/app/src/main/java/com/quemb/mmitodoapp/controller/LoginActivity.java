@@ -14,6 +14,7 @@ import android.view.ViewTreeObserver;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.application.ApplicationController;
@@ -188,9 +189,12 @@ public class LoginActivity extends ListActivity implements OnFormRowValueChanged
 
                 stopProgress();
 
-                if (response.body()){
+                if (response.code() == 200 && response.body()){
                     LoginActivity.this.saveLoginData();
                     Authentication.setAuthenticated(LoginActivity.this);
+                } else {
+                    Toast toast;
+                    toast = Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_SHORT);
                 }
             }
 
