@@ -48,12 +48,11 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
 
         Intent intent = getActivity().getIntent();
 
-        String extraId = intent.getStringExtra("TODO_id");
-        Integer id = Integer.parseInt(extraId);
-        if (id != null){
+        int extraId = intent.getIntExtra(INTENT_EXTRA_TODO_ID, -1);
+        if (extraId < 0){
             mTodo = new ToDo();
         }else {
-            mTodo = new ToDo();
+            mTodo = ToDo.findById(ToDo.class, extraId);
         }
     }
 
