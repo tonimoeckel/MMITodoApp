@@ -70,8 +70,7 @@ public class TodoListFragment extends ListFragment {
     @Override
     public void onListItemClick (ListView l, View v, int position, long id) {
         Intent formIntend = new Intent(getActivity(), TodoFormActivity.class);
-        formIntend.putExtra("TODO_id", String.valueOf(id));
-        String extraId = formIntend.getStringExtra("TODO_id");
+        formIntend.putExtra(INTENT_EXTRA_TODO_ID, id);
         startActivity(formIntend);
     }
 }

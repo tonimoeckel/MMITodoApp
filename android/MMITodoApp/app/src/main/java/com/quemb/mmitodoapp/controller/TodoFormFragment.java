@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.orm.util.NamingHelper;
 import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.model.ToDo;
 import com.quemb.qmbform.FormManager;
@@ -48,10 +49,10 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
 
         Intent intent = getActivity().getIntent();
 
-        String extraId = intent.getStringExtra("TODO_id");
-        Integer id = Integer.parseInt(extraId);
-        if (id != null){
-            mTodo = new ToDo();
+        Long extraId = intent.getLongExtra(INTENT_EXTRA_TODO_ID, -1);
+        if (extraId != -1){
+            Integer id = (int) (long) extraId;
+            mTodo = ToDo.findById(ToDo.class, id);
         }else {
             mTodo = new ToDo();
         }
