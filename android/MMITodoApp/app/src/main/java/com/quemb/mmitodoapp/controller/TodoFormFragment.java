@@ -46,19 +46,21 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = getActivity().getIntent();
 
-        int extraId = intent.getIntExtra(INTENT_EXTRA_TODO_ID, -1);
-        if (extraId < 0){
-            mTodo = new ToDo();
-        }else {
-            mTodo = ToDo.findById(ToDo.class, extraId);
-        }
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Intent intent = getActivity().getIntent();
+
+        long extraId = intent.getLongExtra(INTENT_EXTRA_TODO_ID, -1);
+        if (extraId < 0){
+            mTodo = new ToDo();
+        }else {
+            mTodo = ToDo.findById(ToDo.class, extraId);
+        }
 
         mListView = (ListView) view.findViewById(R.id.listview);
 

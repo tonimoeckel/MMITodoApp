@@ -25,7 +25,6 @@ import java.util.Iterator;
  */
 public class TodoListFragment extends ListFragment {
 
-    public static final String INTENT_EXTRA_TODO_ID = "INTENT_EXTRA_TODO_ID";
 
     public TodoListFragment() {
     }
@@ -69,9 +68,11 @@ public class TodoListFragment extends ListFragment {
 
     @Override
     public void onListItemClick (ListView l, View v, int position, long id) {
+
+        ToDo toDo = (ToDo) getListAdapter().getItem(position);
         Intent formIntend = new Intent(getActivity(), TodoFormActivity.class);
-        formIntend.putExtra("TODO_id", String.valueOf(id));
-        String extraId = formIntend.getStringExtra("TODO_id");
+        formIntend.putExtra(TodoFormFragment.INTENT_EXTRA_TODO_ID, toDo.getId());
         startActivity(formIntend);
+
     }
 }
