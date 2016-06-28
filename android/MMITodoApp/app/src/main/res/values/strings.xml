@@ -9,6 +9,8 @@
     <string name="label_done">Done</string>
     <string name="section_done">Done</string>
     <string name="section_customized">Customized</string>
+    <string name="due_date">Due date</string>
+    <string name="formated_due_date">Due date: %1$s %2$s</string>
     <string name="section_due">Due</string>
     <string name="hint_due_date">Date</string>
     <string name="label_due_date">Date</string>

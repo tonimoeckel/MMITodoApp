@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daimajia.swipe.SwipeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <!-- Bottom View Start-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="#ececec"
+        android:id="@+id/bottom_wrapper"
+        android:weightSum="1"
+        android:layout_width="80dp"
+        android:paddingTop="25dp"
+        android:layout_height="fill_parent" >
+
+        <CheckBox
+            android:id="@+id/favoriteCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="25dp"
+            style="?android:attr/starStyle" />
+
+    </LinearLayout>
+    <!-- Bottom View End-->
+
+    <!-- Surface View Start -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/doneCheckBox"
+            android:checked="false"
+            android:paddingLeft="5dp"
+            android:layout_marginLeft="5dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_gravity="left" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/toDoTitleTextHolder"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Title"
+                android:id="@+id/toDoTitle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Text"
+                android:id="@+id/toDoText"
+                android:singleLine="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Text"
+                android:id="@+id/toDoDueDate"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/favoriteImageView"
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:paddingRight="5dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/ic_grade_black_48dp"
+            android:tint="@color/colorAccent"/>
+
+    </LinearLayout>
+    <!-- Surface View End -->
+</com.daimajia.swipe.SwipeLayout>

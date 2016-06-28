@@ -1,5 +1,7 @@
 package com.quemb.mmitodoapp.model;
 
+import android.content.res.Resources;
+
 import com.orm.SugarRecord;
 import com.orm.dsl.Table;
 import com.quemb.mmitodoapp.R;
@@ -98,4 +100,5 @@ public class ToDo extends SugarRecord {
     public void setTime(Date time) {
         this.time = time;
     }
+
 }

@@ -7,6 +7,7 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -37,8 +38,19 @@ public class TodoListFragment extends ListFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        fetchData();
+        AdapterView.OnItemLongClickListener listener = new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> l, View v, int position, long id) {
+                ToDo toDo = (ToDo) getListAdapter().getItem(position);
+                toDo.setFavorite(!toDo.favorite);
+                toDo.save();
+                return false;
+            }
+        };
 
+        getListView().setOnItemLongClickListener(listener);
+
+        fetchData();
     }
 
     private void fetchData() {
@@ -73,4 +85,5 @@ public class TodoListFragment extends ListFragment {
         startActivity(formIntend);
 
     }
+
 }
