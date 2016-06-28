@@ -1,14 +1,20 @@
 package com.quemb.mmitodoapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.quemb.mmitodoapp.R;
+import com.quemb.mmitodoapp.controller.TodoFormActivity;
+import com.quemb.mmitodoapp.controller.TodoListFragment;
 import com.quemb.mmitodoapp.model.ToDo;
 
 import java.util.ArrayList;
@@ -28,14 +34,16 @@ public class ToDoArrayAdapter extends ArrayAdapter<ToDo> {
 
         ToDo item = getItem(position);
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(android.R.layout.simple_list_item_2, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.todo_list_item, parent, false);
         }
 
-        TextView titleTextView = (TextView) convertView.findViewById(android.R.id.text1);
-        TextView subtitleTextView = (TextView) convertView.findViewById(android.R.id.text2);
+        TextView titleTextView = (TextView) convertView.findViewById(R.id.toDoTitle);
+        TextView subtitleTextView = (TextView) convertView.findViewById(R.id.toDoText);
+        CheckBox doneCheckBox = (CheckBox) convertView.findViewById(R.id.doneCheckBox);
 
         titleTextView.setText(item.title);
         subtitleTextView.setText(item.text);
+        doneCheckBox.setChecked(item.done);
 
         return convertView;
     }
