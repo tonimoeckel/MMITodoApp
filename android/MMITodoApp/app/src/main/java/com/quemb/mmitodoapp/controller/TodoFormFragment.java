@@ -28,10 +28,19 @@ import java.lang.reflect.Field;
  */
 public class TodoFormFragment extends Fragment implements OnFormRowValueChangedListener{
 
-    public static final String INTENT_EXTRA_TODO_ID = "INTENT_EXTRA_TODO_ID";
+    private static final String INTENT_EXTRA_TODO_ID = "INTENT_EXTRA_TODO_ID";
     private static final String TAG = "TodoFormFragment";
     private ToDo mTodo;
-    private ListView mListView;
+
+    public static Fragment newInstance(long toDoId) {
+
+        TodoFormFragment formFragment = new TodoFormFragment();
+        Bundle args = new Bundle();
+        args.putLong(INTENT_EXTRA_TODO_ID, toDoId);
+        formFragment.setArguments(args);
+        return formFragment;
+
+    }
 
     public TodoFormFragment() {
     }
@@ -62,16 +71,16 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
             mTodo = ToDo.findById(ToDo.class, extraId);
         }
 
-        mListView = (ListView) view.findViewById(R.id.listview);
+        ListView listView = (ListView) view.findViewById(R.id.listview);
 
         FormDescriptorAnnotationFactory factory = new FormDescriptorAnnotationFactory(getActivity());
         FormDescriptor descriptor = factory.createFormDescriptorFromAnnotatedClass(mTodo);
 
         FormManager formManager = new FormManager();
-        formManager.setup(descriptor, mListView, getActivity());
+        formManager.setup(descriptor, listView, getActivity());
         formManager.setOnFormRowValueChangedListener(this);
 
-        Log.d(TAG, mListView.toString());
+        Log.d(TAG, listView.toString());
 
     }
 
@@ -88,4 +97,6 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
         }
 
     }
+
+
 }
