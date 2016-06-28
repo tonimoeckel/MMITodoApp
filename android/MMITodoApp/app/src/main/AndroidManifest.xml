@@ -55,6 +55,16 @@
             android:name=".controller.TodoDetailActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
+
+            <intent-filter>
+
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="todo" android:host="mmitodoapp.com" />
+
+            </intent-filter>
+
         </activity>
     </application>
 
