@@ -4,9 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MMITodoApp.iml" filepath="$PROJECT_DIR$/MMITodoApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/libs/QMBForm/QMBForm.iml" filepath="$PROJECT_DIR$/libs/QMBForm/QMBForm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/Reachability/Reachability.iml" filepath="$PROJECT_DIR$/libs/Reachability/Reachability.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/libs/libs.iml" filepath="$PROJECT_DIR$/libs/libs.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libs/Reachability/reachability.iml" filepath="$PROJECT_DIR$/libs/Reachability/reachability.iml" />
     </modules>
   </component>
 </project>

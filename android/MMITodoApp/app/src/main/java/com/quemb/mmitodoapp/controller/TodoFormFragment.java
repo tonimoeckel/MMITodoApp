@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.quemb.mmitodoapp.R;
+import com.quemb.mmitodoapp.adapter.ToFragmentsPagingAdapter;
 import com.quemb.mmitodoapp.model.ToDo;
 import com.quemb.qmbform.FormManager;
 import com.quemb.qmbform.annotation.FormDescriptorAnnotationFactory;
@@ -28,19 +29,9 @@ import java.lang.reflect.Field;
  */
 public class TodoFormFragment extends Fragment implements OnFormRowValueChangedListener{
 
-    private static final String INTENT_EXTRA_TODO_ID = "INTENT_EXTRA_TODO_ID";
     private static final String TAG = "TodoFormFragment";
     private ToDo mTodo;
 
-    public static Fragment newInstance(long toDoId) {
-
-        TodoFormFragment formFragment = new TodoFormFragment();
-        Bundle args = new Bundle();
-        args.putLong(INTENT_EXTRA_TODO_ID, toDoId);
-        formFragment.setArguments(args);
-        return formFragment;
-
-    }
 
     public TodoFormFragment() {
     }
@@ -62,9 +53,7 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Intent intent = getActivity().getIntent();
-
-        long extraId = intent.getLongExtra(INTENT_EXTRA_TODO_ID, -1);
+        long extraId = getArguments().getLong(ToFragmentsPagingAdapter.INTENT_EXTRA_TODO_ID, -1);
         if (extraId < 0){
             mTodo = new ToDo();
         }else {
