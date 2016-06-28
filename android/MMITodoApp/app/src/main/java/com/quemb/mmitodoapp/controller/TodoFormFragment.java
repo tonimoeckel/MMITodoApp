@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.orm.util.NamingHelper;
 import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.model.ToDo;
 import com.quemb.qmbform.FormManager;
@@ -29,10 +28,19 @@ import java.lang.reflect.Field;
  */
 public class TodoFormFragment extends Fragment implements OnFormRowValueChangedListener{
 
-    public static final String INTENT_EXTRA_TODO_ID = "INTENT_EXTRA_TODO_ID";
+    private static final String INTENT_EXTRA_TODO_ID = "INTENT_EXTRA_TODO_ID";
     private static final String TAG = "TodoFormFragment";
     private ToDo mTodo;
-    private ListView mListView;
+
+    public static Fragment newInstance(long toDoId) {
+
+        TodoFormFragment formFragment = new TodoFormFragment();
+        Bundle args = new Bundle();
+        args.putLong(INTENT_EXTRA_TODO_ID, toDoId);
+        formFragment.setArguments(args);
+        return formFragment;
+
+    }
 
     public TodoFormFragment() {
     }
@@ -47,31 +55,32 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = getActivity().getIntent();
 
-        Long extraId = intent.getLongExtra(INTENT_EXTRA_TODO_ID, -1);
-        if (extraId != -1){
-            Integer id = (int) (long) extraId;
-            mTodo = ToDo.findById(ToDo.class, id);
-        }else {
-            mTodo = new ToDo();
-        }
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mListView = (ListView) view.findViewById(R.id.listview);
+        Intent intent = getActivity().getIntent();
+
+        long extraId = intent.getLongExtra(INTENT_EXTRA_TODO_ID, -1);
+        if (extraId < 0){
+            mTodo = new ToDo();
+        }else {
+            mTodo = ToDo.findById(ToDo.class, extraId);
+        }
+
+        ListView listView = (ListView) view.findViewById(R.id.listview);
 
         FormDescriptorAnnotationFactory factory = new FormDescriptorAnnotationFactory(getActivity());
         FormDescriptor descriptor = factory.createFormDescriptorFromAnnotatedClass(mTodo);
 
         FormManager formManager = new FormManager();
-        formManager.setup(descriptor, mListView, getActivity());
+        formManager.setup(descriptor, listView, getActivity());
         formManager.setOnFormRowValueChangedListener(this);
 
-        Log.d(TAG, mListView.toString());
+        Log.d(TAG, listView.toString());
 
     }
 
@@ -88,4 +97,6 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
         }
 
     }
+
+
 }
