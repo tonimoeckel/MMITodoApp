@@ -34,7 +34,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Text"
-            android:id="@+id/toDoText" />
+            android:id="@+id/toDoText"
+            android:singleLine="true" />
     </LinearLayout>
 
 </LinearLayout>
