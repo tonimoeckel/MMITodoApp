@@ -42,4 +42,5 @@
     <string name="title_details">Details</string>
     <string name="title_contacts">Contacts</string>
     <string name="title_location">Location</string>
+    <string name="activity_contacts">Contacts</string>
 </resources>
