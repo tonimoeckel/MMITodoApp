@@ -1,8 +1,5 @@
 package com.quemb.mmitodoapp.model;
 
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.credentials.Credential;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.validator.PasswordValidator;

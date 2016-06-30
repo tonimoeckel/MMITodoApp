@@ -9,6 +9,7 @@ import com.quemb.qmbform.annotation.FormElement;
 import com.quemb.qmbform.annotation.FormElementDelegate;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -39,6 +40,7 @@ public class ToDo extends SugarRecord {
     @FormElement(required = true, hint = R.string.hint_done, sortId = 100, tag = "favorite", label = R.string.label_favorite, rowDescriptorType = RowDescriptor.FormRowDescriptorTypeBooleanCheck, section = R.string.section_more)
     public Boolean favorite = false;
 
+    public ArrayList<String> contacts = new ArrayList<>();
 
     public ToDo(){
 
