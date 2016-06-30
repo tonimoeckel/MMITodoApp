@@ -1,6 +1,7 @@
 package com.quemb.mmitodoapp.adapter;
 
 import com.quemb.mmitodoapp.R;
+import com.quemb.mmitodoapp.controller.TodoContactsFragment;
 import com.quemb.mmitodoapp.controller.TodoFormFragment;
 import com.quemb.mmitodoapp.model.FragmentTabItem;
 import com.quemb.mmitodoapp.model.ToDo;
@@ -34,7 +35,7 @@ public class ToFragmentsPagingAdapter extends FragmentPagerAdapter {
 
         mFragmentTabItems = new ArrayList<>();
         mFragmentTabItems.add(new FragmentTabItem(context.getString(R.string.title_details), TodoFormFragment.class));
-        mFragmentTabItems.add(new FragmentTabItem(context.getString(R.string.title_contacts), TodoFormFragment.class));
+        mFragmentTabItems.add(new FragmentTabItem(context.getString(R.string.title_contacts), TodoContactsFragment.class));
         mFragmentTabItems.add(new FragmentTabItem(context.getString(R.string.title_location), TodoFormFragment.class));
 
     }

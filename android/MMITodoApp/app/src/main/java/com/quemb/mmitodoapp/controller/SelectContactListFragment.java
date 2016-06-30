@@ -3,6 +3,8 @@ package com.quemb.mmitodoapp.controller;
 import com.quemb.mmitodoapp.R;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Build;
@@ -13,13 +15,15 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
 /**
  * Created by tonimoeckel on 29.06.16.
  */
-public class ContactListFragment extends ListFragment {
+public class SelectContactListFragment extends ListFragment {
 
     // Request code for READ_CONTACTS. It can be any number > 0.
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
@@ -119,5 +123,19 @@ public class ContactListFragment extends ListFragment {
         return (SimpleCursorAdapter) getListAdapter();
     }
 
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
 
+        Cursor c = (Cursor) getSimpleCursorAdapter().getItem(position);
+        String contactId = c.getString(0);
+
+        Intent intent = new Intent();
+        intent.putExtra(ContactsContract.Contacts._ID, contactId);
+
+        Activity activity = getActivity();
+        activity.setResult(Activity.RESULT_OK, intent);
+
+        activity.finish();
+    }
 }

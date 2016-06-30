@@ -11,7 +11,7 @@ import android.widget.FrameLayout;
 /**
  * Created by tonimoeckel on 29.06.16.
  */
-public class ContactListActivity extends AppCompatActivity {
+public class SelectContactListActivity extends AppCompatActivity {
 
     private static final int CONTENT_VIEW_ID = 55555555;
 
