@@ -2,11 +2,11 @@ package com.quemb.mmitodoapp.controller;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -69,7 +69,10 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
         inflater.inflate(R.menu.menu_todo_detail, menu);
 
         MenuItem item = mMenu.findItem(R.id.action_remove);
-        item.setVisible(!(mTodo.getId() < 0));
+        if (item != null){
+            item.setVisible(!(mTodo.getId() < 0));
+        }
+
 
     }
 
@@ -85,7 +88,6 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
         }
 
         ListView listView = (ListView) view.findViewById(R.id.listview);
-        listView.setDescendantFocusability(ListView.FOCUS_AFTER_DESCENDANTS);
 
         FormDescriptorAnnotationFactory factory = new FormDescriptorAnnotationFactory(getActivity());
         FormDescriptor descriptor = factory.createFormDescriptorFromAnnotatedClass(mTodo);

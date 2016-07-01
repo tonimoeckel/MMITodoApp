@@ -46,4 +46,14 @@
     <string name="label_no_contacts">No contacts</string>
     <string name="button_remove">Remove</string>
     <string name="action_remove">Remove</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_remove_selected">Remove selected</string>
+    <string name="action_select">Select</string>
+    <string name="title_email">Email</string>
+    <string name="title_call_phone">Call phone</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="text_send_email">Send emai</string>
+    <string name="error_no_email_clients">\"There are no email clients installed.\"</string>
+    <string name="title_send_sms">Send SMS</string>
+    <string name="title_send_email">Send Email</string>
 </resources>
