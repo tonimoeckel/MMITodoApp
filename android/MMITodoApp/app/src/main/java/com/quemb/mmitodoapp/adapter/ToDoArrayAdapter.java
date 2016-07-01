@@ -1,12 +1,15 @@
 package com.quemb.mmitodoapp.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.quemb.mmitodoapp.R;
@@ -14,6 +17,10 @@ import com.quemb.mmitodoapp.model.ToDo;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import static android.R.color.holo_blue_light;
 
 /**
  * Created by tonimockel on 18.06.16.
@@ -33,6 +40,7 @@ public class ToDoArrayAdapter extends ArrayAdapter<ToDo> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.todo_list_item, parent, false);
         }
 
+        LinearLayout listItemLinearLayout = (LinearLayout) convertView.findViewById(R.id.toDoListItem);
         TextView titleTextView = (TextView) convertView.findViewById(R.id.toDoTitle);
         TextView subtitleTextView = (TextView) convertView.findViewById(R.id.toDoText);
         CheckBox doneCheckBox = (CheckBox) convertView.findViewById(R.id.doneCheckBox);
@@ -61,6 +69,7 @@ public class ToDoArrayAdapter extends ArrayAdapter<ToDo> {
             public void onClick(View v) {
                 item.setDone(!item.done);
                 item.save();
+                notifyDataSetChanged();
             }
         });
 
@@ -68,8 +77,29 @@ public class ToDoArrayAdapter extends ArrayAdapter<ToDo> {
             public void onClick(View v) {
                 item.setFavorite(!item.favorite);
                 item.save();
+                notifyDataSetChanged();
             }
         });
+
+        // Prüfen ob to do schon überfällig
+        Calendar calendar = Calendar.getInstance();
+        if (item.date != null) {
+            calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(new SimpleDateFormat("d").format(item.date)));
+            calendar.set(Calendar.MONTH, Integer.parseInt(new SimpleDateFormat("MM").format(item.date)) - 1);
+            calendar.set(Calendar.YEAR, Integer.parseInt(new SimpleDateFormat("yyyy").format(item.date)));
+        }
+        if (item.time != null) {
+            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(new SimpleDateFormat("HH").format(item.time)));
+            calendar.set(Calendar.MINUTE, Integer.parseInt(new SimpleDateFormat("mm").format(item.time)));
+        }
+
+        if (calendar.getTime().before(Calendar.getInstance().getTime()) && !item.done) {
+            listItemLinearLayout.setBackgroundColor(0xFFFCE4EC);
+        } else if (item.done) {
+            listItemLinearLayout.setBackgroundColor(0xFFF1F8E9);
+        } else {
+            listItemLinearLayout.setBackgroundColor(0xFFFFFFFF);
+        }
 
         return convertView;
     }
