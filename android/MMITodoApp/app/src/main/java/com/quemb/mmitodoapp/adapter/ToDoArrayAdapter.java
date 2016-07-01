@@ -1,8 +1,6 @@
 package com.quemb.mmitodoapp.adapter;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +30,7 @@ public class ToDoArrayAdapter extends ArrayAdapter<ToDo> {
 
         final ToDo item = getItem(position);
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.todo_list_swipe_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.todo_list_item, parent, false);
         }
 
         TextView titleTextView = (TextView) convertView.findViewById(R.id.toDoTitle);
@@ -40,7 +38,6 @@ public class ToDoArrayAdapter extends ArrayAdapter<ToDo> {
         CheckBox doneCheckBox = (CheckBox) convertView.findViewById(R.id.doneCheckBox);
         CheckBox favoriteCheckBox = (CheckBox) convertView.findViewById(R.id.favoriteCheckBox);
         TextView dueDateTextView = (TextView) convertView.findViewById(R.id.toDoDueDate);
-        ImageView favoriteImageView = (ImageView) convertView.findViewById(R.id.favoriteImageView);
 
         titleTextView.setText(item.title);
         subtitleTextView.setText(item.text);
@@ -73,12 +70,6 @@ public class ToDoArrayAdapter extends ArrayAdapter<ToDo> {
                 item.save();
             }
         });
-
-        if (!item.favorite) {
-            favoriteImageView.setVisibility(View.INVISIBLE);
-        } else {
-            favoriteImageView.setVisibility(View.VISIBLE);
-        }
 
         return convertView;
     }
