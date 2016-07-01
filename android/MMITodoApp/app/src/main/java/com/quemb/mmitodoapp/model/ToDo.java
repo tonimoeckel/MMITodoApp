@@ -1,14 +1,20 @@
 package com.quemb.mmitodoapp.model;
 
+import com.google.gson.Gson;
+import com.google.gson.internal.Streams;
+import com.google.gson.reflect.TypeToken;
+
 import android.content.res.Resources;
 
 import com.orm.SugarRecord;
+import com.orm.dsl.Ignore;
 import com.orm.dsl.Table;
 import com.quemb.mmitodoapp.R;
 import com.quemb.qmbform.annotation.FormElement;
 import com.quemb.qmbform.annotation.FormElementDelegate;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -40,7 +46,8 @@ public class ToDo extends SugarRecord {
     @FormElement(required = true, hint = R.string.hint_done, sortId = 100, tag = "favorite", label = R.string.label_favorite, rowDescriptorType = RowDescriptor.FormRowDescriptorTypeBooleanCheck, section = R.string.section_more)
     public Boolean favorite = false;
 
-    public ArrayList<String> contacts = new ArrayList<>();
+
+    public String contactsJson;
 
     public ToDo(){
 
@@ -105,6 +112,24 @@ public class ToDo extends SugarRecord {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public ArrayList<String> getContacts(){
+
+        Gson gson = new Gson();
+        if (contactsJson == null){
+            return new ArrayList<>();
+        }
+        Type listType = new TypeToken<ArrayList<String>>(){}.getType();
+        return gson.fromJson(contactsJson, listType);
+
+    }
+
+    public void setContacts(ArrayList<String> contacts){
+
+        Gson gson = new Gson();
+        contactsJson = gson.toJson(contacts);
+
     }
 
 }

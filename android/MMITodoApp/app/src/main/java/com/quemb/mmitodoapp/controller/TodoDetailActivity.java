@@ -30,7 +30,7 @@ public class TodoDetailActivity extends TabHostActivity implements ToDoListener 
         long extraId = fetchToDoId();
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        mTodoPagingAdapter = new ToFragmentsPagingAdapter(getSupportFragmentManager(), this, extraId);
+        mTodoPagingAdapter = new ToFragmentsPagingAdapter(getFragmentManager(), this, extraId);
         viewPager.setAdapter(mTodoPagingAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);

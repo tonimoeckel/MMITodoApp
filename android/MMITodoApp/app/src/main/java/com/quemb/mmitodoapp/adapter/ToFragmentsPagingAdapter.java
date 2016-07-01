@@ -1,17 +1,18 @@
 package com.quemb.mmitodoapp.adapter;
 
 import com.quemb.mmitodoapp.R;
+import com.quemb.mmitodoapp.controller.ToDoMapFragement;
 import com.quemb.mmitodoapp.controller.TodoContactsFragment;
 import com.quemb.mmitodoapp.controller.TodoFormFragment;
 import com.quemb.mmitodoapp.model.FragmentTabItem;
 
 import android.annotation.TargetApi;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v13.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
@@ -46,7 +47,6 @@ public class ToFragmentsPagingAdapter extends FragmentPagerAdapter {
         return mFragmentTabItems.size();
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     public Fragment getItem(int position) {
 
@@ -92,7 +92,7 @@ public class ToFragmentsPagingAdapter extends FragmentPagerAdapter {
                             TodoContactsFragment.class));
             mFragmentTabItems
                     .add(new FragmentTabItem(getContext().getString(R.string.title_location),
-                            TodoFormFragment.class));
+                            ToDoMapFragement.class));
         }
 
     }
