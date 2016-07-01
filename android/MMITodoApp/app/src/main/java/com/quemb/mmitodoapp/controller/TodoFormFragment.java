@@ -1,13 +1,17 @@
 package com.quemb.mmitodoapp.controller;
 
 import android.annotation.TargetApi;
-import android.content.Intent;
+import android.app.Activity;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -30,11 +34,20 @@ import java.lang.reflect.Field;
 public class TodoFormFragment extends Fragment implements OnFormRowValueChangedListener{
 
     private static final String TAG = "TodoFormFragment";
+
+    private static final String SECTION_TAG_REMOVE = "SECTION_TAG_REMOVE";
+    private static final String ROW_TAG_REMOVE = "ROW_TAG_REMOVE";
+
     private ToDo mTodo;
+
+    private FormManager mFormManager;
+
+    private Menu mMenu;
 
 
     public TodoFormFragment() {
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +58,18 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        mMenu = menu;
+        inflater.inflate(R.menu.menu_todo_detail, menu);
+
+        MenuItem item = mMenu.findItem(R.id.action_remove);
+        item.setVisible(!(mTodo.getId() < 0));
 
     }
 
@@ -61,16 +85,39 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
         }
 
         ListView listView = (ListView) view.findViewById(R.id.listview);
+        listView.setDescendantFocusability(ListView.FOCUS_AFTER_DESCENDANTS);
 
         FormDescriptorAnnotationFactory factory = new FormDescriptorAnnotationFactory(getActivity());
         FormDescriptor descriptor = factory.createFormDescriptorFromAnnotatedClass(mTodo);
 
-        FormManager formManager = new FormManager();
-        formManager.setup(descriptor, listView, getActivity());
-        formManager.setOnFormRowValueChangedListener(this);
+        mFormManager = new FormManager();
+        mFormManager.setup(descriptor, listView, getActivity());
+        mFormManager.setOnFormRowValueChangedListener(this);
 
         Log.d(TAG, listView.toString());
 
+    }
+
+    private void showRemoveButton() {
+
+        MenuItem item = mMenu.findItem(R.id.action_remove);
+        item.setVisible(true);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.action_remove){
+            removeTodo();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void removeTodo() {
+        mTodo.delete();
+        getActivity().finish();
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
@@ -78,9 +125,30 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
     public void onValueChanged(RowDescriptor rowDescriptor, Value<?> oldValue, Value<?> newValue) {
 
         try {
+
+            boolean newItem = mTodo.getId() < 0;
+
             Field field = mTodo.getClass().getField(rowDescriptor.getTag());
             field.set(mTodo, newValue.getValue());
             mTodo.save();
+
+            if (newItem){
+                showRemoveButton();
+            }
+
+            Activity parentActivity = getActivity();
+            if (parentActivity instanceof ToDoListener){
+
+                ToDoListener toDoListener = (ToDoListener) parentActivity;
+
+                if (newItem){
+                    toDoListener.onCreate(mTodo);
+                }else {
+                    toDoListener.onUpdate(mTodo);
+                }
+
+            }
+
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }

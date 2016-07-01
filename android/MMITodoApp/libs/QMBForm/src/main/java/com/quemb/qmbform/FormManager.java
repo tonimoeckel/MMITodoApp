@@ -22,6 +22,8 @@ import android.widget.ListView;
  */
 public class FormManager implements OnFormRowChangeListener, OnFormRowValueChangedListener {
 
+
+
     private FormDescriptor mFormDescriptor;
     protected ListView mListView;
     protected OnFormRowClickListener mOnFormRowClickListener;
@@ -131,6 +133,10 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
     public void setOnFormRowValueChangedListener(
             OnFormRowValueChangedListener onFormRowValueChangedListener) {
         mOnFormRowValueChangedListener = onFormRowValueChangedListener;
+    }
+
+    public FormDescriptor getFormDescriptor() {
+        return mFormDescriptor;
     }
 }
 

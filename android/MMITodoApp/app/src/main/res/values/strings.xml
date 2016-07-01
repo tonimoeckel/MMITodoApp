@@ -44,4 +44,6 @@
     <string name="title_location">Location</string>
     <string name="activity_contacts">Contacts</string>
     <string name="label_no_contacts">No contacts</string>
+    <string name="button_remove">Remove</string>
+    <string name="action_remove">Remove</string>
 </resources>

@@ -51,7 +51,11 @@ public class ToDo extends SugarRecord {
      */
 
     public Long getId() {
-        return id;
+        Long result = super.getId();
+        if (result == null){
+            return (long) -1;
+        }
+        return result;
     }
 
 

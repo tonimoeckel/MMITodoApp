@@ -4,7 +4,6 @@ import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.controller.TodoContactsFragment;
 import com.quemb.mmitodoapp.controller.TodoFormFragment;
 import com.quemb.mmitodoapp.model.FragmentTabItem;
-import com.quemb.mmitodoapp.model.ToDo;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -13,7 +12,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -24,6 +22,8 @@ public class ToFragmentsPagingAdapter extends FragmentPagerAdapter {
 
     public static final String INTENT_EXTRA_TODO_ID = "INTENT_EXTRA_TODO_ID";
 
+    private final Context mContext;
+
     private long mToDoId;
     private ArrayList<FragmentTabItem> mFragmentTabItems;
 
@@ -32,11 +32,12 @@ public class ToFragmentsPagingAdapter extends FragmentPagerAdapter {
         super(fragmentManager);
 
         mToDoId = toDoID;
+        mContext = context;
 
         mFragmentTabItems = new ArrayList<>();
         mFragmentTabItems.add(new FragmentTabItem(context.getString(R.string.title_details), TodoFormFragment.class));
-        mFragmentTabItems.add(new FragmentTabItem(context.getString(R.string.title_contacts), TodoContactsFragment.class));
-        mFragmentTabItems.add(new FragmentTabItem(context.getString(R.string.title_location), TodoFormFragment.class));
+
+        addExtendedTabs(mToDoId);
 
     }
 
@@ -82,4 +83,25 @@ public class ToFragmentsPagingAdapter extends FragmentPagerAdapter {
 
     }
 
+    public void addExtendedTabs(Long todoId) {
+
+        if (todoId > 0) {
+            mToDoId = todoId;
+            mFragmentTabItems
+                    .add(new FragmentTabItem(getContext().getString(R.string.title_contacts),
+                            TodoContactsFragment.class));
+            mFragmentTabItems
+                    .add(new FragmentTabItem(getContext().getString(R.string.title_location),
+                            TodoFormFragment.class));
+        }
+
+    }
+
+    public boolean isExtendMode() {
+        return mFragmentTabItems.size()>1;
+    }
+
+    public Context getContext() {
+        return mContext;
+    }
 }

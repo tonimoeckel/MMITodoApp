@@ -53,9 +53,9 @@
         </activity>
 
         <activity
-            android:windowSoftInputMode="adjustPan"
             android:name=".controller.TodoDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
 
 
             <intent-filter>
