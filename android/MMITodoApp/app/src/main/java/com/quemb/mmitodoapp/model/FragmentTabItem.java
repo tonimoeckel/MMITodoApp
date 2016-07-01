@@ -1,7 +1,7 @@
 package com.quemb.mmitodoapp.model;
 
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 
 /**
  * Created by tonimoeckel on 28.06.16.

@@ -56,4 +56,12 @@
     <string name="error_no_email_clients">\"There are no email clients installed.\"</string>
     <string name="title_send_sms">Send SMS</string>
     <string name="title_send_email">Send Email</string>
+    <string name="action_locate">Locate</string>
+    <string name="action_search">Search</string>
+    <string name="service_not_available">Service not available</string>
+    <string name="invalid_lat_long_used">Invalid Lat/Lng</string>
+    <string name="no_address_found">No address found</string>
+    <string name="address_found">Address found</string>
+    <string name="no_location_data_provided">No location extra provided</string>
+    <string name="template_address">%1$s, %2$s</string>
 </resources>
