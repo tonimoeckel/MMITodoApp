@@ -1,18 +1,14 @@
 package com.quemb.mmitodoapp.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
 import com.quemb.mmitodoapp.R;
-import com.quemb.mmitodoapp.model.ToDo;
 import com.quemb.mmitodoapp.util.ContactFetcher;
 
 import java.util.ArrayList;

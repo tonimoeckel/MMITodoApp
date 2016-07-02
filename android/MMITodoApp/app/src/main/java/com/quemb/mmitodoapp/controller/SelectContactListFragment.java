@@ -1,7 +1,5 @@
 package com.quemb.mmitodoapp.controller;
 
-import com.quemb.mmitodoapp.R;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -15,10 +13,11 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.quemb.mmitodoapp.R;
 
 /**
  * Created by tonimoeckel on 29.06.16.

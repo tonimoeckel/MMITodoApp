@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/containerMap"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:orientation="vertical" />
+
+    <FrameLayout
+
+        android:background="@drawable/top_border_background"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/address_info_container_height">
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@android:id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="@string/label_please_select_a_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@android:id/progress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <LinearLayout
+            android:visibility="visible"
+            android:orientation="horizontal"
+            android:id="@+id/container_address"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/buttonEdit"
+                android:alpha="0.5"
+                android:src="@drawable/ic_edit_location_black_24dp"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_gravity="center"
+                android:background="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/button_edit" />
+
+            <TextView
+                android:id="@+id/editText_address"
+                android:layout_gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:text="@string/label_please_select_a_location"
+                android:textAlignment="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/buttonAdd"
+                android:alpha="0.5"
+                android:src="@drawable/ic_save_black_24dp"
+                android:layout_marginRight="@dimen/medium_margin"
+                android:layout_gravity="center"
+                android:background="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/button_save" />
+
+            <ImageButton
+                android:visibility="gone"
+                android:id="@+id/buttonRemove"
+                android:alpha="0.5"
+                android:src="@drawable/ic_delete_black_24dp"
+                android:layout_marginRight="@dimen/medium_margin"
+                android:layout_gravity="center"
+                android:background="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/button_remove" />
+
+        </LinearLayout>
+
+
+
+    </FrameLayout>
+
+
+</LinearLayout>

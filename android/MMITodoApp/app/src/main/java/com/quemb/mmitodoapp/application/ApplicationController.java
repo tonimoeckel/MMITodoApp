@@ -5,8 +5,6 @@ import com.quemb.mmitodoapp.model.ConnectionSetting;
 import com.quemb.mmitodoapp.model.ConnectionSettingFactory;
 import com.quemb.mmitodoapp.network.ToDoService;
 
-import android.app.Application;
-
 import java.net.MalformedURLException;
 
 import retrofit2.Retrofit;

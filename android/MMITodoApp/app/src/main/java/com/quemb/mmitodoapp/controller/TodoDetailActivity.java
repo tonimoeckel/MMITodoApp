@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.adapter.ToFragmentsPagingAdapter;
 import com.quemb.mmitodoapp.model.ToDo;
+import com.quemb.mmitodoapp.util.ToDoIntentUtils;
 
 /**
  * Created by tonimockel on 04.06.16.
@@ -16,7 +17,7 @@ import com.quemb.mmitodoapp.model.ToDo;
 
 public class TodoDetailActivity extends TabHostActivity implements ToDoListener {
 
-    public static final String INTENT_EXTRA_TODO_ID = "INTENT_EXTRA_TODO_ID";
+
     private static final String TAG = "TodoDetailActivity";
 
     private ToFragmentsPagingAdapter mTodoPagingAdapter;
@@ -43,7 +44,7 @@ public class TodoDetailActivity extends TabHostActivity implements ToDoListener 
 
     private long fetchToDoId() {
 
-        long extraId = getIntent().getLongExtra(INTENT_EXTRA_TODO_ID, -1);
+        long extraId = getIntent().getLongExtra(ToDoIntentUtils.INTENT_EXTRA_TODO_ID, -1);
 
         if (extraId < 0){
             Uri data = getIntent().getData();

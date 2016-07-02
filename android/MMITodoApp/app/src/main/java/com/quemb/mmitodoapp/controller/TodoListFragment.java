@@ -1,8 +1,8 @@
 package com.quemb.mmitodoapp.controller;
 
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +14,8 @@ import android.widget.ListView;
 import com.google.common.collect.Lists;
 import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.adapter.ToDoArrayAdapter;
-import com.quemb.mmitodoapp.adapter.ToFragmentsPagingAdapter;
 import com.quemb.mmitodoapp.model.ToDo;
+import com.quemb.mmitodoapp.util.ToDoIntentUtils;
 
 import java.util.Iterator;
 
@@ -81,7 +81,7 @@ public class TodoListFragment extends ListFragment {
 
         ToDo toDo = (ToDo) getListAdapter().getItem(position);
         Intent formIntend = new Intent(getActivity(), TodoDetailActivity.class);
-        formIntend.putExtra(TodoDetailActivity.INTENT_EXTRA_TODO_ID, toDo.getId());
+        formIntend.putExtra(ToDoIntentUtils.INTENT_EXTRA_TODO_ID, toDo.getId());
         startActivity(formIntend);
 
     }

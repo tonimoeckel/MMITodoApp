@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.quemb.mmitodoapp.model.ConnectionSetting;
-
 /**
  * Created by tonimockel on 22.06.16.
  */

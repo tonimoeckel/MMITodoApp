@@ -1,14 +1,11 @@
 package com.quemb.mmitodoapp.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,9 +15,6 @@ import com.quemb.mmitodoapp.model.ToDo;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-import static android.R.color.holo_blue_light;
 
 /**
  * Created by tonimockel on 18.06.16.

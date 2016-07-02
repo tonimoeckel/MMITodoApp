@@ -64,4 +64,10 @@
     <string name="address_found">Address found</string>
     <string name="no_location_data_provided">No location extra provided</string>
     <string name="template_address">%1$s, %2$s</string>
+    <string name="button_save">Save</string>
+    <string name="label_please_select_a_location">Please select a location</string>
+    <string name="text_unknown_location">Unknown Location</string>
+    <string name="button_edit">Edit</string>
+    <string name="text_edit_address">Edit Address</string>
+    <string name="text_enter_your_own_address">Enter you own address</string>
 </resources>

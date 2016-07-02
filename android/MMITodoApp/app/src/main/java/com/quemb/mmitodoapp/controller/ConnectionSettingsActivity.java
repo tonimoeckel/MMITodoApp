@@ -1,5 +1,13 @@
 package com.quemb.mmitodoapp.controller;
 
+import android.annotation.TargetApi;
+import android.app.ListActivity;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
 import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.model.ConnectionSetting;
 import com.quemb.mmitodoapp.model.ConnectionSettingFactory;
@@ -15,14 +23,6 @@ import com.quemb.qmbform.descriptor.Value;
 import com.quemb.reachability.Reachability;
 import com.quemb.reachability.ReachabilityListener;
 import com.quemb.reachability.ReachabilityStatus;
-
-import android.annotation.TargetApi;
-import android.app.ListActivity;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;

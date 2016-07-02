@@ -1,17 +1,12 @@
 package com.quemb.mmitodoapp.model;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
-import com.google.gson.internal.Streams;
 import com.google.gson.reflect.TypeToken;
-
-import android.content.res.Resources;
-
 import com.orm.SugarRecord;
-import com.orm.dsl.Ignore;
 import com.orm.dsl.Table;
 import com.quemb.mmitodoapp.R;
 import com.quemb.qmbform.annotation.FormElement;
-import com.quemb.qmbform.annotation.FormElementDelegate;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 
 import java.lang.reflect.Type;
@@ -46,6 +41,13 @@ public class ToDo extends SugarRecord {
     @FormElement(required = true, hint = R.string.hint_done, sortId = 100, tag = "favorite", label = R.string.label_favorite, rowDescriptorType = RowDescriptor.FormRowDescriptorTypeBooleanCheck, section = R.string.section_more)
     public Boolean favorite = false;
 
+    public String userAddress;
+
+    public String geocoderAddress;
+
+    public double lat;
+
+    public double lng;
 
     public String contactsJson;
 
@@ -132,4 +134,30 @@ public class ToDo extends SugarRecord {
 
     }
 
+    public LatLng getLatLng(){
+        if (lat == 0 || lng == 0){
+            return null;
+        }
+        return new LatLng(lat, lng);
+    }
+
+    public void setLatLng(LatLng latLng){
+        if (latLng == null){
+            lat = 0;
+            lng = 0;
+        }else {
+            lat = latLng.latitude;
+            lng = latLng.longitude;
+        }
+
+    }
+
+
+    public String getPreferredAddress() {
+
+        if (userAddress != null){
+            return userAddress;
+        }
+        return geocoderAddress;
+    }
 }

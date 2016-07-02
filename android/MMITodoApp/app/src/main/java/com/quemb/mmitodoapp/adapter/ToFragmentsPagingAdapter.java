@@ -1,19 +1,16 @@
 package com.quemb.mmitodoapp.adapter;
 
+import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+
 import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.controller.ToDoMapFragement;
 import com.quemb.mmitodoapp.controller.TodoContactsFragment;
 import com.quemb.mmitodoapp.controller.TodoFormFragment;
 import com.quemb.mmitodoapp.model.FragmentTabItem;
-
-import android.annotation.TargetApi;
-
-import android.content.Context;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 

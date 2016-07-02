@@ -3,16 +3,9 @@ package com.quemb.mmitodoapp.controller;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.quemb.mmitodoapp.model.ConnectionSetting;
 import com.quemb.mmitodoapp.model.ConnectionSettingFactory;
-import com.quemb.mmitodoapp.util.Authentication;
-import com.quemb.reachability.Reachability;
-import com.quemb.reachability.ReachabilityListener;
-import com.quemb.reachability.ReachabilityStatus;
-
-import java.net.MalformedURLException;
 
 /**
  * Created by tonimockel on 22.06.16.

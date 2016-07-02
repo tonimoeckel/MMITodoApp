@@ -1,10 +1,8 @@
 package com.quemb.mmitodoapp.model;
 
 import com.quemb.mmitodoapp.R;
-import com.quemb.mmitodoapp.validator.PasswordValidator;
 import com.quemb.qmbform.annotation.FormElement;
 import com.quemb.qmbform.annotation.FormElementDelegate;
-import com.quemb.qmbform.annotation.validators.EmailValidator;
 import com.quemb.qmbform.descriptor.DataSource;
 import com.quemb.qmbform.descriptor.DataSourceListener;
 import com.quemb.qmbform.descriptor.RowDescriptor;
@@ -14,8 +12,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.http.HTTP;
 
 /**
  * Created by tonimockel on 19.06.16.

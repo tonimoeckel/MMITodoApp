@@ -1,11 +1,10 @@
 package com.quemb.mmitodoapp.model;
 
-import com.quemb.mmitodoapp.application.ApplicationController;
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
+import com.quemb.mmitodoapp.application.ApplicationController;
 
 import java.net.MalformedURLException;
 

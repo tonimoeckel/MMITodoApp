@@ -1,16 +1,15 @@
 package com.quemb.mmitodoapp.model;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.validator.PasswordValidator;
 import com.quemb.qmbform.annotation.FormElement;
 import com.quemb.qmbform.annotation.validators.EmailValidator;
 import com.quemb.qmbform.descriptor.RowDescriptor;
-
-import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 /**
  * Created by tonimockel on 19.06.16.
