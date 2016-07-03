@@ -18,12 +18,14 @@ import com.quemb.mmitodoapp.model.ToDo;
 import com.quemb.mmitodoapp.util.ToDoIntentUtils;
 
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class TodoListFragment extends ListFragment {
 
+    private Boolean mSortByFavorite = true;
 
     public TodoListFragment() {
     }
@@ -54,8 +56,13 @@ public class TodoListFragment extends ListFragment {
     }
 
     private void fetchData() {
+        List<ToDo> items;
 
-        Iterator<ToDo> items = ToDo.findAll(ToDo.class);
+        if (mSortByFavorite) {
+            items = ToDo.find(ToDo.class, null, null, null, "done DESC, favorite DESC", null);
+        } else {
+            items = ToDo.find(ToDo.class, null, null, null, "done DESC, date DESC, time DESC", null);
+        }
 
         if (getListAdapter() == null ){
             ArrayAdapter<ToDo> adapter = new ToDoArrayAdapter(getActivity(), Lists.newArrayList(items) );
@@ -84,6 +91,10 @@ public class TodoListFragment extends ListFragment {
         formIntend.putExtra(ToDoIntentUtils.INTENT_EXTRA_TODO_ID, toDo.getId());
         startActivity(formIntend);
 
+    }
+
+    public void setSortByFavorite(Boolean sortByFavorite) {
+        this.mSortByFavorite = sortByFavorite;
     }
 
 }
