@@ -1,8 +1,10 @@
 package com.quemb.mmitodoapp.controller;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -47,6 +49,18 @@ public class TodoListActivity extends AppCompatActivity {
         if (id == R.id.action_login) {
             Intent formIntend = new Intent(TodoListActivity.this, LoginActivity.class);
             startActivity(formIntend);
+            return true;
+        }
+
+        if (id == R.id.action_order_by_favourite) {
+            Fragment fragment = getFragmentManager().findFragmentByTag("fragment_todo_list");
+
+            return true;
+        }
+
+        if (id == R.id.action_order_by_due_date) {
+            Fragment fragment = getFragmentManager().findFragmentByTag("fragment_todo_list");
+
             return true;
         }
 
