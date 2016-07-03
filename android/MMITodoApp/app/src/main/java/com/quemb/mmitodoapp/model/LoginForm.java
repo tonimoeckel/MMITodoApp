@@ -21,10 +21,10 @@ public class LoginForm {
     private static final String SP_KEY_PASSWORD = "SP_KEY_PASSWORD";
 
     @FormElement(rowDescriptorType = RowDescriptor.FormRowDescriptorTypeEmailInline, validatorClasses = EmailValidator.class, label = R.string.label_email, tag = "email", sortId = 0, hint = R.string.hint_email)
-    public String email;
+    public String email = "s@bht.de";
 
     @FormElement(rowDescriptorType = RowDescriptor.FormRowDescriptorTypePasswordInline, validatorClasses = PasswordValidator.class, label = R.string.label_password, tag = "pwd", sortId = 1)
-    public String pwd;
+    public String pwd = "000000";
 
 
     public void save(Context context) {

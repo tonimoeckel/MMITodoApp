@@ -35,4 +35,6 @@ public class ConnectionSettingTest {
         connectionSetting.host = "192.168.178.20";
         assertTrue(connectionSetting.isValid());
     }
+
+
 }

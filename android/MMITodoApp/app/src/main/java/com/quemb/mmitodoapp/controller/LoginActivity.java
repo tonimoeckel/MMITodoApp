@@ -2,6 +2,7 @@ package com.quemb.mmitodoapp.controller;
 
 import android.annotation.TargetApi;
 import android.app.ListActivity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -175,24 +176,28 @@ public class LoginActivity extends ListActivity implements OnFormRowValueChanged
         startProgress();
 
         ToDoService toDoService = ApplicationController.getSharedInstance().getToDoService();
-        Call<Boolean> call = toDoService.authenticate(mLoginForm);
+        Call<Boolean> call = toDoService.authenticate(loginForm);
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
 
                 stopProgress();
 
-                if (response.code() == 200 && response.body()){
+                if (response.isSuccessful() && response.body()){
                     LoginActivity.this.saveLoginData();
                     Authentication.setAuthenticated(LoginActivity.this);
+                    Toast.makeText(LoginActivity.this, getString(R.string.auth_success), Toast.LENGTH_SHORT).show();
+                    ApplicationController.getSharedInstance().triggerSync();
                 } else {
-                    Toast toast;
-                    toast = Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_SHORT);
+                    Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
+
+                stopProgress();
+                Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_SHORT).show();
 
             }
         });

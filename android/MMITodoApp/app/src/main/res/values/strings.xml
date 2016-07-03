@@ -70,4 +70,5 @@
     <string name="button_edit">Edit</string>
     <string name="text_edit_address">Edit Address</string>
     <string name="text_enter_your_own_address">Enter you own address</string>
+    <string name="auth_success">Login successfull</string>
 </resources>

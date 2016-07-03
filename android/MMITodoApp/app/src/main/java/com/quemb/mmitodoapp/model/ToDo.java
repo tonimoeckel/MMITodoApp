@@ -2,6 +2,9 @@ package com.quemb.mmitodoapp.model;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import com.orm.SugarRecord;
 import com.orm.dsl.Table;
@@ -21,34 +24,43 @@ import java.util.Date;
 public class ToDo extends SugarRecord {
 
 
-    private Long id;
-
+    @SerializedName("name")
     @FormElement(required = true, hint = R.string.hint_title, sortId = 0, tag = "title", label = R.string.label_title, rowDescriptorType = RowDescriptor.FormRowDescriptorTypeText)
     public String title;
 
+    @SerializedName("description")
     @FormElement(required = true, hint = R.string.hint_text, sortId = 5, tag = "text", label = R.string.label_text, rowDescriptorType = RowDescriptor.FormRowDescriptorTypeTextView)
     public String text;
 
     @FormElement(required = true, hint = R.string.hint_done, sortId = 10, tag = "done", label = R.string.label_done, rowDescriptorType = RowDescriptor.FormRowDescriptorTypeBooleanCheck, section = R.string.section_due)
     public Boolean done = false;
 
+    @SerializedName("expiry")
     @FormElement(required = true, hint = R.string.hint_due_date, sortId = 15, tag = "date", label = R.string.label_due_date, rowDescriptorType = RowDescriptor.FormRowDescriptorTypeDatePicker, section = R.string.section_due)
-    public Date date = new Date();
+    public Date date = null;
 
+    @Expose(deserialize = false, serialize = false)
     @FormElement(required = true, hint = R.string.hint_due_time, sortId = 15, tag = "time", label = R.string.label_due_time, rowDescriptorType = RowDescriptor.FormRowDescriptorTypeTime, section = R.string.section_due)
     public Date time;
 
+    @SerializedName("favourite")
     @FormElement(required = true, hint = R.string.hint_done, sortId = 100, tag = "favorite", label = R.string.label_favorite, rowDescriptorType = RowDescriptor.FormRowDescriptorTypeBooleanCheck, section = R.string.section_more)
     public Boolean favorite = false;
 
+    @Expose(deserialize = false, serialize = false)
     public String userAddress;
 
+    @Expose(deserialize = false, serialize = false)
     public String geocoderAddress;
 
-    public double lat;
+    @Expose(deserialize = false, serialize = false)
+    public Double lat;
 
-    public double lng;
+    @Expose(deserialize = false, serialize = false)
+    public Double lng;
 
+    @SerializedName("contacts")
+    @JsonAdapter(JsonStringTypeAdapter.class)
     public String contactsJson;
 
     public ToDo(){
@@ -116,6 +128,10 @@ public class ToDo extends SugarRecord {
         this.time = time;
     }
 
+    public boolean equals(ToDo toDo){
+        return toDo != null && toDo.getId() != null && getId() != null && getId().equals(toDo.getId());
+    }
+
     public ArrayList<String> getContacts(){
 
         Gson gson = new Gson();
@@ -143,8 +159,8 @@ public class ToDo extends SugarRecord {
 
     public void setLatLng(LatLng latLng){
         if (latLng == null){
-            lat = 0;
-            lng = 0;
+            lat = 0D;
+            lng = 0D;
         }else {
             lat = latLng.latitude;
             lng = latLng.longitude;
