@@ -1,5 +1,8 @@
 package com.quemb.mmitodoapp.model;
 
+import android.content.ContentResolver;
+import android.os.Bundle;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
@@ -9,12 +12,16 @@ import com.google.gson.reflect.TypeToken;
 import com.orm.SugarRecord;
 import com.orm.dsl.Table;
 import com.quemb.mmitodoapp.R;
+import com.quemb.mmitodoapp.application.ApplicationController;
+import com.quemb.mmitodoapp.service.SyncService;
 import com.quemb.qmbform.annotation.FormElement;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
+
+import static com.quemb.mmitodoapp.application.ApplicationController.AUTHORITY;
 
 /**
  * Created by tonimockel on 03.06.16.
@@ -168,12 +175,49 @@ public class ToDo extends SugarRecord {
 
     }
 
-
     public String getPreferredAddress() {
 
         if (userAddress != null){
             return userAddress;
         }
         return geocoderAddress;
+    }
+
+    public long save(Boolean triggerSync) {
+
+        if (triggerSync){
+            boolean update = getId() > 0;
+
+            long id = super.save();
+
+            Bundle syncBundle = new Bundle();
+            syncBundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+            if (update){
+                // PUT
+                syncBundle.putBoolean(SyncService.SYNC_EXTRAS_PUT, true);
+            }else {
+                // POST
+                syncBundle.putBoolean(SyncService.SYNC_EXTRAS_POST, true);
+            }
+            syncBundle.putLong(SyncService.SYNC_EXTRAS_DATA_ID, id);
+            ContentResolver.requestSync(ApplicationController.getSharedInstance().getAccount(), AUTHORITY, syncBundle);
+            return id;
+        }else {
+            return super.save();
+        }
+
+    }
+
+    public boolean delete(Boolean triggerSync) {
+
+        if (triggerSync){
+            Bundle syncBundle = new Bundle();
+            syncBundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+            syncBundle.putBoolean(SyncService.SYNC_EXTRAS_DELETE, true);
+            syncBundle.putLong(SyncService.SYNC_EXTRAS_DATA_ID, getId());
+            ContentResolver.requestSync(ApplicationController.getSharedInstance().getAccount(), AUTHORITY, syncBundle);
+        }
+
+        return super.delete();
     }
 }

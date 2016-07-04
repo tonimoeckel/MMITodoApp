@@ -139,13 +139,13 @@ public class LoginActivity extends ListActivity implements OnFormRowValueChanged
     public void onFormRowClick(FormItemDescriptor itemDescriptor) {
 
         //If login button clicked
-        if (itemDescriptor.getTag().equals(ROW_DESCRIPTOR_TAG_LOGIN)){
+        if (itemDescriptor != null && itemDescriptor.getTag().equals(ROW_DESCRIPTOR_TAG_LOGIN)){
 
             if (mFormDescriptor.isValid(this)){
                 processLogin(mLoginForm);
             }
 
-        }else if (itemDescriptor.getTag().equals(ROW_DESCRIPTOR_TAG_CONNECTION)){
+        }else if (itemDescriptor != null && itemDescriptor.getTag().equals(ROW_DESCRIPTOR_TAG_CONNECTION)){
 
             Intent formIntend = new Intent(this, ConnectionSettingsActivity.class);
             startActivity(formIntend);
@@ -188,6 +188,8 @@ public class LoginActivity extends ListActivity implements OnFormRowValueChanged
                     Authentication.setAuthenticated(LoginActivity.this);
                     Toast.makeText(LoginActivity.this, getString(R.string.auth_success), Toast.LENGTH_SHORT).show();
                     ApplicationController.getSharedInstance().triggerSync();
+                    startActivity(new Intent(LoginActivity.this, TodoListActivity.class));
+                    finish();
                 } else {
                     Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_SHORT).show();
                 }

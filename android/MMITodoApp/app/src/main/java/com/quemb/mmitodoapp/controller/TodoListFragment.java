@@ -1,9 +1,16 @@
 package com.quemb.mmitodoapp.controller;
 
+import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SyncStatusObserver;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,17 +22,22 @@ import com.google.common.collect.Lists;
 import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.adapter.ToDoArrayAdapter;
 import com.quemb.mmitodoapp.model.ToDo;
+import com.quemb.mmitodoapp.service.SyncService;
 import com.quemb.mmitodoapp.util.ToDoIntentUtils;
 
 import java.util.Iterator;
 import java.util.List;
 
+import static android.content.ContentResolver.SYNC_OBSERVER_TYPE_ACTIVE;
+
 /**
  * A placeholder fragment containing a simple view.
  */
-public class TodoListFragment extends ListFragment {
+public class TodoListFragment extends ListFragment implements SyncStatusObserver {
 
+    private static final String TAG = "TodoList";
     private Boolean mSortByFavorite = true;
+    private Object mSyncMonitor;
 
     public TodoListFragment() {
     }
@@ -45,7 +57,7 @@ public class TodoListFragment extends ListFragment {
             public boolean onItemLongClick(AdapterView<?> l, View v, int position, long id) {
                 ToDo toDo = (ToDo) getListAdapter().getItem(position);
                 toDo.setFavorite(!toDo.favorite);
-                toDo.save();
+                toDo.save(true);
                 return false;
             }
         };
@@ -54,6 +66,9 @@ public class TodoListFragment extends ListFragment {
 
         fetchData();
     }
+
+
+
 
     private void fetchData() {
         List<ToDo> items;
@@ -81,6 +96,21 @@ public class TodoListFragment extends ListFragment {
         super.onResume();
 
         fetchData();
+
+        mSyncMonitor = ContentResolver.addStatusChangeListener(
+                SYNC_OBSERVER_TYPE_ACTIVE
+                        | ContentResolver.SYNC_OBSERVER_TYPE_PENDING,
+                this
+        );
+
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        ContentResolver.removeStatusChangeListener(mSyncMonitor);
     }
 
     @Override
@@ -97,4 +127,21 @@ public class TodoListFragment extends ListFragment {
         this.mSortByFavorite = sortByFavorite;
     }
 
+
+
+    @Override
+    public void onStatusChanged(int i) {
+        if (i == SYNC_OBSERVER_TYPE_ACTIVE){
+            Log.d(TAG,"Sync Finished");
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    fetchData();
+
+                }
+            });
+
+        }
+    }
 }

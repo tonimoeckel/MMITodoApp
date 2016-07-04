@@ -69,7 +69,7 @@ public class ToDoMapFragement extends MapFragment implements OnMapReadyCallback,
                 }else {
                     mToDo.setLatLng(null);
                 }
-                mToDo.save();
+                mToDo.save(true);
 
                 updateButtons();
 
@@ -87,7 +87,7 @@ public class ToDoMapFragement extends MapFragment implements OnMapReadyCallback,
                         }else {
                             mToDo.userAddress = null;
                         }
-                        mToDo.save();
+                        mToDo.save(true);
                         displayAddress();
                     }
                 }).show();

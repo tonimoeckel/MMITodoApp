@@ -2,6 +2,7 @@ package com.quemb.mmitodoapp.controller;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import android.widget.ListView;
 
 import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.adapter.ToFragmentsPagingAdapter;
+import com.quemb.mmitodoapp.application.ApplicationController;
 import com.quemb.mmitodoapp.model.ToDo;
 import com.quemb.qmbform.FormManager;
 import com.quemb.qmbform.annotation.FormDescriptorAnnotationFactory;
@@ -117,7 +119,7 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
     }
 
     private void removeTodo() {
-        mTodo.delete();
+        mTodo.delete(true);
         getActivity().finish();
     }
 
@@ -131,7 +133,7 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
 
             Field field = mTodo.getClass().getField(rowDescriptor.getTag());
             field.set(mTodo, newValue.getValue());
-            mTodo.save();
+            mTodo.save(true);
 
             if (newItem){
                 showRemoveButton();

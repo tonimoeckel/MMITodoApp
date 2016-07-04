@@ -108,7 +108,7 @@ public class TodoContactsFragment extends ListFragment {
         getListView().clearChoices();
         getListView().requestLayout();
         mTodo.setContacts(contacts);
-        mTodo.save();
+        mTodo.save(true);
 
         getListView().setChoiceMode(ListView.CHOICE_MODE_NONE);
         mEditMode = false;
@@ -209,7 +209,7 @@ public class TodoContactsFragment extends ListFragment {
                 if (!contacts.contains(uri.toString())) {
                     contacts.add(uri.toString());
                     mTodo.setContacts(contacts);
-                    mTodo.save();
+                    mTodo.save(true);
 
                     ContactsUriArrayAdapter arrayAdapter = (ContactsUriArrayAdapter) getListAdapter();
                     arrayAdapter.add(uri.toString());

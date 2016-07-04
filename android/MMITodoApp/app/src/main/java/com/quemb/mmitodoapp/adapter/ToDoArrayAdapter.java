@@ -62,7 +62,7 @@ public class ToDoArrayAdapter extends ArrayAdapter<ToDo> {
         doneCheckBox.setOnClickListener( new View.OnClickListener() {
             public void onClick(View v) {
                 item.setDone(!item.done);
-                item.save();
+                item.save(true);
                 notifyDataSetChanged();
             }
         });
@@ -70,7 +70,7 @@ public class ToDoArrayAdapter extends ArrayAdapter<ToDo> {
         favoriteCheckBox.setOnClickListener( new View.OnClickListener() {
             public void onClick(View v) {
                 item.setFavorite(!item.favorite);
-                item.save();
+                item.save(true);
                 notifyDataSetChanged();
             }
         });
