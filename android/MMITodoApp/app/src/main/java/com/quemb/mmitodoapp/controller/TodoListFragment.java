@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -59,6 +60,18 @@ public class TodoListFragment extends ListFragment {
         getListView().setOnItemLongClickListener(listener);
 
         fetchData();
+
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent formIntend = new Intent(getActivity(), TodoDetailActivity.class);
+                startActivity(formIntend);
+
+            }
+        });
     }
 
     private void fetchData() {

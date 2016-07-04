@@ -26,7 +26,6 @@ public class TodoDetailActivity extends TabHostActivity implements ToDoListener 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activixty_todo_form);
 
         long extraId = fetchToDoId();
 

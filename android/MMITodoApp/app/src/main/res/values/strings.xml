@@ -77,4 +77,6 @@
     <string name="delete_todo_confirm_question">Do you really want to delete this Todo?</string>
     <string name="label_yes">Yes</string>
     <string name="label_no">No</string>
+    <string name="tab_title_list">List</string>
+    <string name="tab_title_map">Map</string>
 </resources>
