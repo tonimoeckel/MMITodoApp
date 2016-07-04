@@ -37,7 +37,7 @@ public class TodoListActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_todo_list, menu);
+        getMenuInflater().inflate(R.menu.menu_todo_list_activity, menu);
         return true;
     }
 
@@ -49,18 +49,6 @@ public class TodoListActivity extends AppCompatActivity {
         if (id == R.id.action_login) {
             Intent formIntend = new Intent(TodoListActivity.this, LoginActivity.class);
             startActivity(formIntend);
-            return true;
-        }
-
-        if (id == R.id.action_order_by_favourite) {
-            Fragment fragment = getFragmentManager().findFragmentByTag("fragment_todo_list");
-
-            return true;
-        }
-
-        if (id == R.id.action_order_by_due_date) {
-            Fragment fragment = getFragmentManager().findFragmentByTag("fragment_todo_list");
-
             return true;
         }
 
