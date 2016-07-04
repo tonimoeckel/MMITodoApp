@@ -57,13 +57,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="696b07e2-1928-40a8-97d8-56b363864160" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_todo_list_activity.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoListActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoListFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_todo_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_todo_list.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/QMBForm/QMBForm.iml" afterPath="$PROJECT_DIR$/libs/QMBForm/QMBForm.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoFormFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoFormFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
     </list>
     <ignored path="MMITodoApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -202,11 +198,50 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TodoListFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TodoListFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoListFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.73003376">
+            <state vertical-scroll-proportion="0.0">
               <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TodoDetailActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoDetailActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TodoFormFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoFormFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.40494937">
+              <caret line="123" column="56" selection-start-line="123" selection-start-column="56" selection-end-line="123" selection-end-column="56" />
+              <folding>
+                <element signature="e#3546#3566#0" expanded="true" />
+                <element signature="e#3600#3637#0" expanded="true" />
+                <element signature="e#3720#3737#0" expanded="true" />
+                <element signature="e#3739#3917#0" expanded="true" />
+                <element signature="e#3916#3917#0" expanded="true" />
+                <element signature="e#3958#3976#0" expanded="true" />
+                <element signature="e#3978#4190#0" expanded="true" />
+                <element signature="e#4189#4190#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-14.705882">
+              <caret line="77" column="27" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -4398,8 +4433,6 @@
       <list>
         <option value="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/config/Constants.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/util/AddressResultReceiver.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoFormFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/service/FetchAddressIntentService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/model/ToDoMarker.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/marker_content_todo.xml" />
@@ -4447,6 +4480,8 @@
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_todo_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoListActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoListFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoFormFragment.java" />
       </list>
     </option>
   </component>
@@ -5800,7 +5835,7 @@
           <option name="timeStamp" value="56" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="72" />
+      <option name="time" value="76" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -6189,9 +6224,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoListFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.73003376">
+        <state vertical-scroll-proportion="0.0">
           <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoDetailActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.705882">
+          <caret line="77" column="27" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoFormFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40494937">
+          <caret line="123" column="56" selection-start-line="123" selection-start-column="56" selection-end-line="123" selection-end-column="56" />
+          <folding>
+            <element signature="e#3546#3566#0" expanded="true" />
+            <element signature="e#3600#3637#0" expanded="true" />
+            <element signature="e#3720#3737#0" expanded="true" />
+            <element signature="e#3739#3917#0" expanded="true" />
+            <element signature="e#3916#3917#0" expanded="true" />
+            <element signature="e#3958#3976#0" expanded="true" />
+            <element signature="e#3978#4190#0" expanded="true" />
+            <element signature="e#4189#4190#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
