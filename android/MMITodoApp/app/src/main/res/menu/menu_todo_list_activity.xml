@@ -3,13 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.quemb.mmitodoapp.controller.TodoListActivity">
     <item
-        android:id="@+id/action_order_by_favourite"
+        android:id="@+id/action_login"
         android:orderInCategory="100"
-        android:title="@string/action_order_by_favourite"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_order_by_due_date"
-        android:orderInCategory="100"
-        android:title="@string/action_order_by_due_date"
+        android:title="@string/action_login"
         app:showAsAction="never" />
 </menu>

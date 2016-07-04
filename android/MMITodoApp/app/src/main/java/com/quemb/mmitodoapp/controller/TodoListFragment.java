@@ -1,17 +1,15 @@
 package com.quemb.mmitodoapp.controller;
 
-import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
-import android.content.Context;
+import android.app.Fragment;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SyncStatusObserver;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -22,22 +20,17 @@ import com.google.common.collect.Lists;
 import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.adapter.ToDoArrayAdapter;
 import com.quemb.mmitodoapp.model.ToDo;
-import com.quemb.mmitodoapp.service.SyncService;
 import com.quemb.mmitodoapp.util.ToDoIntentUtils;
 
 import java.util.Iterator;
 import java.util.List;
 
-import static android.content.ContentResolver.SYNC_OBSERVER_TYPE_ACTIVE;
-
 /**
  * A placeholder fragment containing a simple view.
  */
-public class TodoListFragment extends ListFragment implements SyncStatusObserver {
+public class TodoListFragment extends ListFragment {
 
-    private static final String TAG = "TodoList";
     private Boolean mSortByFavorite = true;
-    private Object mSyncMonitor;
 
     public TodoListFragment() {
     }
@@ -45,6 +38,8 @@ public class TodoListFragment extends ListFragment implements SyncStatusObserver
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_todo_list, container, false);
     }
 
@@ -65,10 +60,19 @@ public class TodoListFragment extends ListFragment implements SyncStatusObserver
         getListView().setOnItemLongClickListener(listener);
 
         fetchData();
+
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent formIntend = new Intent(getActivity(), TodoDetailActivity.class);
+                startActivity(formIntend);
+
+            }
+        });
     }
-
-
-
 
     private void fetchData() {
         List<ToDo> items;
@@ -96,21 +100,6 @@ public class TodoListFragment extends ListFragment implements SyncStatusObserver
         super.onResume();
 
         fetchData();
-
-        mSyncMonitor = ContentResolver.addStatusChangeListener(
-                SYNC_OBSERVER_TYPE_ACTIVE
-                        | ContentResolver.SYNC_OBSERVER_TYPE_PENDING,
-                this
-        );
-
-    }
-
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        ContentResolver.removeStatusChangeListener(mSyncMonitor);
     }
 
     @Override
@@ -123,25 +112,32 @@ public class TodoListFragment extends ListFragment implements SyncStatusObserver
 
     }
 
-    public void setSortByFavorite(Boolean sortByFavorite) {
-        this.mSortByFavorite = sortByFavorite;
+    @Override
+    public void onCreateOptionsMenu (Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_todo_list, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
-
-
 
     @Override
-    public void onStatusChanged(int i) {
-        if (i == SYNC_OBSERVER_TYPE_ACTIVE){
-            Log.d(TAG,"Sync Finished");
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-                    fetchData();
+        int id = item.getItemId();
 
-                }
-            });
+        if (id == R.id.action_order_by_favourite) {
+            mSortByFavorite = true;
+            fetchData();
 
+            return true;
         }
+
+        if (id == R.id.action_order_by_due_date) {
+            mSortByFavorite = false;
+            fetchData();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
+
 }

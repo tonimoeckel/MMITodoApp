@@ -1,37 +1,37 @@
 package com.quemb.mmitodoapp.controller;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.quemb.mmitodoapp.R;
+import com.quemb.mmitodoapp.adapter.ToDoListFragmentsPagingAdapter;
 
-public class TodoListActivity extends AppCompatActivity {
+public class TodoListActivity extends TabHostActivity {
+
+    private static final String TAG = "TodoListActivity";
+
+    private ToDoListFragmentsPagingAdapter mTodoPagingAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_todo_list);
+
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        mTodoPagingAdapter = new ToDoListFragmentsPagingAdapter(getSupportFragmentManager(), this);
+        viewPager.setAdapter(mTodoPagingAdapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent formIntend = new Intent(TodoListActivity.this, TodoDetailActivity.class);
-                startActivity(formIntend);
-
-            }
-        });
     }
 
     
@@ -39,7 +39,7 @@ public class TodoListActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_todo_list, menu);
+        getMenuInflater().inflate(R.menu.menu_todo_list_activity, menu);
         return true;
     }
 
@@ -51,18 +51,6 @@ public class TodoListActivity extends AppCompatActivity {
         if (id == R.id.action_login) {
             Intent formIntend = new Intent(TodoListActivity.this, LoginActivity.class);
             startActivity(formIntend);
-            return true;
-        }
-
-        if (id == R.id.action_order_by_favourite) {
-            Fragment fragment = getFragmentManager().findFragmentByTag("fragment_todo_list");
-
-            return true;
-        }
-
-        if (id == R.id.action_order_by_due_date) {
-            Fragment fragment = getFragmentManager().findFragmentByTag("fragment_todo_list");
-
             return true;
         }
 

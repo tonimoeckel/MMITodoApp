@@ -2,7 +2,8 @@ package com.quemb.mmitodoapp.controller;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.ContentResolver;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,7 +19,6 @@ import android.widget.ListView;
 
 import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.adapter.ToFragmentsPagingAdapter;
-import com.quemb.mmitodoapp.application.ApplicationController;
 import com.quemb.mmitodoapp.model.ToDo;
 import com.quemb.qmbform.FormManager;
 import com.quemb.qmbform.annotation.FormDescriptorAnnotationFactory;
@@ -112,7 +112,23 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.action_remove){
-            removeTodo();
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(R.string.delete_todo);
+            builder.setMessage(R.string.delete_todo_confirm_question);
+            builder.setCancelable(false);
+            builder.setNegativeButton(R.string.label_no, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+            builder.setPositiveButton(R.string.label_yes, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                    removeTodo();
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
         }
 
         return super.onOptionsItemSelected(item);

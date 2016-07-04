@@ -73,4 +73,10 @@
     <string name="text_edit_address">Edit Address</string>
     <string name="text_enter_your_own_address">Enter you own address</string>
     <string name="auth_success">Login successfull</string>
+    <string name="delete_todo">Delete Todo?</string>
+    <string name="delete_todo_confirm_question">Do you really want to delete this Todo?</string>
+    <string name="label_yes">Yes</string>
+    <string name="label_no">No</string>
+    <string name="tab_title_list">List</string>
+    <string name="tab_title_map">Map</string>
 </resources>
