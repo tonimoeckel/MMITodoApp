@@ -158,10 +158,10 @@ public class ToDo extends SugarRecord {
     }
 
     public LatLng getLatLng(){
-        if (lat == 0 || lng == 0){
-            return null;
+        if (lat != null && lng != null){
+            return new LatLng(lat, lng);
         }
-        return new LatLng(lat, lng);
+        return null;
     }
 
     public void setLatLng(LatLng latLng){

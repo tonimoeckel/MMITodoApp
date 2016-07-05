@@ -15,40 +15,17 @@
 ** limitations under the License.
 */
 -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.quemb.mmitodoapp.controller.TodoListActivity">
 
-    <LinearLayout android:id="@+id/progressContainer"
-                  android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:visibility="invisible"
-                  android:gravity="center">
+    <include layout="@layout/layout_toolbar" />
 
-        <ProgressBar style="@android:style/Widget.ProgressBar.Horizontal"
-                     android:progress="50"
-                     android:id="@+id/progress"
-                     android:indeterminate="true"
-                     android:indeterminateOnly="true"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content" />
+    <include layout="@layout/content_connection_settings" />
 
-    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
 
-    <FrameLayout android:id="@+id/listContainer"
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent">
-
-        <ListView android:id="@android:id/list"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:drawSelectorOnTop="false" />
-        <TextView android:id="@android:id/empty"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:gravity="center"
-                  android:textAppearance="?android:attr/textAppearanceLarge" />
-    </FrameLayout>
-
-</FrameLayout>

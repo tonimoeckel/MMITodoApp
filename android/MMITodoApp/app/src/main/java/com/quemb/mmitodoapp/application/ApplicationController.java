@@ -18,7 +18,9 @@ import com.google.gson.JsonSerializer;
 import com.orm.SugarApp;
 import com.quemb.mmitodoapp.model.ConnectionSetting;
 import com.quemb.mmitodoapp.model.ConnectionSettingFactory;
+import com.quemb.mmitodoapp.model.ToDo;
 import com.quemb.mmitodoapp.network.ToDoService;
+import com.quemb.mmitodoapp.util.TodoJsonSerializer;
 
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
@@ -144,7 +146,7 @@ public class ApplicationController extends SugarApp {
         return mToDoService;
     }
 
-    public static Gson getGsonObject(){
+    public static GsonBuilder baseGsonBuilder(){
         return new GsonBuilder()
                 .registerTypeAdapter(String[].class, new JsonDeserializer<String[]>() {
                     @Override
@@ -162,7 +164,12 @@ public class ApplicationController extends SugarApp {
                     public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
                         return new JsonPrimitive(src.getTime());
                     }
-                })
+                });
+    }
+
+    public static Gson getGsonObject(){
+        return  baseGsonBuilder()
+                .registerTypeAdapter(ToDo.class, new TodoJsonSerializer())
                 .create();
     }
 }

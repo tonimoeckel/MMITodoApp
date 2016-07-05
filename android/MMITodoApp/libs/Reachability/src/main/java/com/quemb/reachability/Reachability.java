@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by tonimoeckel on 14.06.16.
@@ -60,6 +61,19 @@ public class Reachability {
 
     }
 
+    public ReachabilityStatus checkReachability() throws ExecutionException, InterruptedException {
+
+        ReachabilityStatus status = ReachabilityStatus.Unknown;
+        if (hasNetworkAvailable()) {
+            ConnectTask task = new ConnectTask();
+            return task.execute(mHost).get();
+        } else {
+            Log.d(TAG, "No network present");
+            mStatus = ReachabilityStatus.NotReachable;
+            return mStatus;
+        }
+
+    }
 
 
     /**

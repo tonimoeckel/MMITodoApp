@@ -65,7 +65,7 @@ public class ToDoListMapFragment extends MapFragment implements OnMapReadyCallba
 
     @Override
     public void onMapLongClick(LatLng latLng) {
-        
+
     }
 
 }

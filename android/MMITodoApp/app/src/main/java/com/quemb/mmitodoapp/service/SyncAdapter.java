@@ -15,14 +15,20 @@ import android.widget.Button;
 import com.google.common.collect.Lists;
 import com.quemb.mmitodoapp.application.ApplicationController;
 import com.quemb.mmitodoapp.controller.TodoContactsFragment;
+import com.quemb.mmitodoapp.model.ConnectionSetting;
+import com.quemb.mmitodoapp.model.ConnectionSettingFactory;
 import com.quemb.mmitodoapp.model.ToDo;
 import com.quemb.mmitodoapp.network.ToDoService;
 import com.quemb.mmitodoapp.util.Authentication;
+import com.quemb.reachability.Reachability;
+import com.quemb.reachability.ReachabilityStatus;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -59,12 +65,28 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
         Log.w(TAG, "onPerformSync");
 
-        if (!Authentication.isAuthenticated(getContext())){
+        ConnectionSetting connectionSetting = ConnectionSettingFactory.getSharedPreferencesSetting(getContext());
+        try {
+            if (!connectionSetting.isValid()){
+                Log.w(TAG, "No host specified. Aborting sync.");
+                return;
+            }
+            Reachability reachability = new Reachability(getContext(), connectionSetting.getURL());
+            ReachabilityStatus status = reachability.checkReachability();
+            if (!status.equals(ReachabilityStatus.Reachable)){
+                Log.w(TAG, "No connection to host. Aborting sync.");
+                return;
+            }
+        } catch (MalformedURLException | InterruptedException | ExecutionException e) {
+            Log.e(TAG, "Host nor reachable",e);
+            return;
+        }
+
+        if (!Authentication.isAuthenticated()){
             Log.w(TAG, "Not Authenticated");
             getContext().getContentResolver().notifyChange(Uri.parse("todo://sync/uncomplete"), null, false);
             return;
         }
-
 
         if (extras.getBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED)){
             Log.w(TAG, "SYNC_EXTRAS_EXPEDITED");
