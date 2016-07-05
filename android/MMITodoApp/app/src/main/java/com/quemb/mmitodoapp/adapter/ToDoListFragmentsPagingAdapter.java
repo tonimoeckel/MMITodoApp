@@ -7,9 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.quemb.mmitodoapp.R;
-import com.quemb.mmitodoapp.controller.ToDoMapFragement;
-import com.quemb.mmitodoapp.controller.TodoContactsFragment;
-import com.quemb.mmitodoapp.controller.TodoFormFragment;
+import com.quemb.mmitodoapp.controller.ToDoListMapFragment;
 import com.quemb.mmitodoapp.controller.TodoListFragment;
 import com.quemb.mmitodoapp.model.FragmentTabItem;
 
@@ -32,7 +30,7 @@ public class ToDoListFragmentsPagingAdapter extends FragmentPagerAdapter {
 
         mFragmentTabItems = new ArrayList<>();
         mFragmentTabItems.add(new FragmentTabItem(context.getString(R.string.tab_title_list), TodoListFragment.class));
-        mFragmentTabItems.add(new FragmentTabItem(context.getString(R.string.tab_title_map), TodoListFragment.class));
+        mFragmentTabItems.add(new FragmentTabItem(context.getString(R.string.tab_title_map), ToDoListMapFragment.class));
 
     }
 

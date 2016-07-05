@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.quemb.mmitodoapp.R;
-import com.quemb.mmitodoapp.controller.ToDoMapFragement;
+import com.quemb.mmitodoapp.controller.ToDoMapFragment;
 import com.quemb.mmitodoapp.controller.TodoContactsFragment;
 import com.quemb.mmitodoapp.controller.TodoFormFragment;
 import com.quemb.mmitodoapp.model.FragmentTabItem;
@@ -90,7 +90,7 @@ public class ToFragmentsPagingAdapter extends FragmentPagerAdapter {
                             TodoContactsFragment.class));
             mFragmentTabItems
                     .add(new FragmentTabItem(getContext().getString(R.string.title_location),
-                            ToDoMapFragement.class));
+                            ToDoMapFragment.class));
         }
 
     }

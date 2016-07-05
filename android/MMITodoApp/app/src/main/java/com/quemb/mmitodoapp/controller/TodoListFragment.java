@@ -61,7 +61,6 @@ public class TodoListFragment extends ListFragment {
 
         fetchData();
 
-
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
