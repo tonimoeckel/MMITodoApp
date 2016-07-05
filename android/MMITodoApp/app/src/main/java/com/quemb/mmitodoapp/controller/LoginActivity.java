@@ -2,11 +2,15 @@ package com.quemb.mmitodoapp.controller;
 
 import android.annotation.TargetApi;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,11 +53,13 @@ public class LoginActivity extends ListActivity implements OnFormRowValueChanged
     private static final String ROW_DESCRIPTOR_TAG_LOGIN = "perform_login";
     private static final String ROW_DESCRIPTOR_TAG_CONNECTION = "connection";
 
+    private static final String SECTION_DESCRIPTOR_TAG_SKIP = "SECTION_DESCRIPTOR_TAG_SKIP";
+    private static final String ROW_DESCRIPTOR_TAG_SKIP = "ROW_DESCRIPTOR_TAG_SKIP";
+
     private LoginForm mLoginForm;
     private FormManager mFormManager;
     private FormDescriptor mFormDescriptor;
     private TextView mValidationTextView;
-    private ProgressBar mProgressBar;
 
     private RowDescriptor mButtonDescriptor;
 
@@ -64,7 +70,6 @@ public class LoginActivity extends ListActivity implements OnFormRowValueChanged
         setContentView(R.layout.activity_login);
 
         mValidationTextView = (TextView) findViewById(R.id.validationTextView);
-        mProgressBar = (ProgressBar) findViewById(android.R.id.progress);
 
         setupForm();
     }
@@ -82,14 +87,25 @@ public class LoginActivity extends ListActivity implements OnFormRowValueChanged
         buttonSection.addRow(mButtonDescriptor);
         mFormDescriptor.addSection(buttonSection);
 
-        SectionDescriptor settingsSection = SectionDescriptor.newInstance(SECTION_DESCRIPTOR_TAG_SETTINGS);
+        SectionDescriptor settingsSection = SectionDescriptor.newInstance(SECTION_DESCRIPTOR_TAG_SETTINGS, getString(R.string.section_settings));
         settingsSection.addRow(RowDescriptor.newInstance(ROW_DESCRIPTOR_TAG_CONNECTION, RowDescriptor.FormRowDescriptorTypeButtonInline, getString(R.string.label_connection_settings)));
+        settingsSection.addRow(RowDescriptor.newInstance(ROW_DESCRIPTOR_TAG_SKIP, RowDescriptor.FormRowDescriptorTypeButton, getString(R.string.label_skip)));
         mFormDescriptor.addSection(settingsSection);
+
+
 
         mFormManager = new FormManager();
         mFormManager.setup(mFormDescriptor, getListView(), this);
         mFormManager.setOnFormRowValueChangedListener(this);
         mFormManager.setOnFormRowClickListener(this);
+
+        getListView().getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                checkValidation();
+                getListView().getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
 
     }
 
@@ -109,10 +125,28 @@ public class LoginActivity extends ListActivity implements OnFormRowValueChanged
             }
         }
 
+        checkValidation();
+
+    }
+
+    private void checkValidation(){
+
         List<RowValidationError> valdationErrors = mFormDescriptor.getFormValidation(this)
                 .getRowValidationErrors();
         showValidationText(valdationErrors);
-        mButtonDescriptor.setDisabled(valdationErrors.size() > 0);
+        setDisabled(valdationErrors.size() > 0);
+
+    }
+
+    private void setDisabled(boolean b) {
+
+        mButtonDescriptor.setDisabled(b);
+
+        // Nur für optische Hervorhebung
+        RowDescriptor descriptor = mFormDescriptor.findRowDescriptor(ROW_DESCRIPTOR_TAG_LOGIN);
+        View view = descriptor.getCell();
+        view.setAlpha(b ? 0.5f : 1.0f);
+
 
     }
 
@@ -125,6 +159,7 @@ public class LoginActivity extends ListActivity implements OnFormRowValueChanged
 
             RowValidationError rowValidationError = validationErrors.get(0);
             mValidationTextView.setText(rowValidationError.getMessage(this));
+
         }else {
             hideValidationText();
         }
@@ -150,60 +185,62 @@ public class LoginActivity extends ListActivity implements OnFormRowValueChanged
             Intent formIntend = new Intent(this, ConnectionSettingsActivity.class);
             startActivity(formIntend);
 
+        }else if (itemDescriptor.getTag().equals(ROW_DESCRIPTOR_TAG_SKIP)){
+
+            startActivity(new Intent(this, TodoListActivity.class));
+            finish();
+
         }
 
     }
 
-    private void startProgress() {
-
-        getProgressBar().setVisibility(View.VISIBLE);
-
-    }
-
-    private void stopProgress() {
-
-        getProgressBar().setVisibility(View.INVISIBLE);
-
-    }
-
-    private ProgressBar getProgressBar(){
-        return  (ProgressBar) findViewById(android.R.id.progress);
-    }
 
     private void processLogin(LoginForm loginForm) {
 
 
-        startProgress();
+        final ProgressDialog dialog = ProgressDialog.show(this, getString(R.string.dialog_login),getString(R.string.dialog_please_wait), true);
+        dialog.show();
 
         ToDoService toDoService = ApplicationController.getSharedInstance().getToDoService();
         Call<Boolean> call = toDoService.authenticate(loginForm);
         call.enqueue(new Callback<Boolean>() {
             @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+            public void onResponse(Call<Boolean> call, final Response<Boolean> response) {
 
-                stopProgress();
 
-                if (response.isSuccessful() && response.body()){
-                    LoginActivity.this.saveLoginData();
-                    Authentication.setAuthenticated(LoginActivity.this);
-                    Toast.makeText(LoginActivity.this, getString(R.string.auth_success), Toast.LENGTH_SHORT).show();
-                    ApplicationController.getSharedInstance().triggerSync();
-                    startActivity(new Intent(LoginActivity.this, TodoListActivity.class));
-                    finish();
-                } else {
-                    Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_SHORT).show();
-                }
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        if (response.isSuccessful() && response.body()){
+                            LoginActivity.this.saveLoginData();
+                            Authentication.setAuthenticated();
+                            Toast.makeText(LoginActivity.this, getString(R.string.auth_success), Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(LoginActivity.this, TodoListActivity.class));
+                            finish();
+                        } else {
+                            showLoginUnvalidMessage();
+                        }
+                    }
+                });
+                dialog.dismiss();
+
             }
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
 
-                stopProgress();
-                Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_SHORT).show();
+                showLoginUnvalidMessage();
+                dialog.dismiss();
 
             }
         });
 
+    }
+
+    private void showLoginUnvalidMessage() {
+        mValidationTextView.setText(getString(R.string.login_not_successful));
+        mValidationTextView.setVisibility(View.VISIBLE);
+        Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_SHORT).show();
     }
 
     private void saveLoginData() {

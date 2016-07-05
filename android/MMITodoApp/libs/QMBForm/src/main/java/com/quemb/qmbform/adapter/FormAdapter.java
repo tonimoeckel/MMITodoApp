@@ -7,6 +7,7 @@ import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
 
 import android.content.Context;
+import android.media.audiofx.AudioEffect;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -70,6 +71,16 @@ public class FormAdapter extends BaseAdapter {
         return CellViewFactory.getInstance().createViewForFormItemDescriptor(mContext, getItem(position));
     }
 
+    @Override
+    public boolean isEnabled(int position) {
+        FormItemDescriptor descriptor = getItem(position);
+        if (descriptor instanceof RowDescriptor){
+            return !((RowDescriptor) descriptor).getDisabled();
+        }else if (descriptor instanceof SectionDescriptor){
+            return false;
+        }
+        return false;
+    }
 
     public Boolean getEnableSectionSeperator() {
         return mEnableSectionSeperator;

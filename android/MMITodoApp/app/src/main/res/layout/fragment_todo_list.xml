@@ -12,13 +12,15 @@
         android:drawSelectorOnTop="false"
         android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp">
 
     </ListView>
 
     <TextView android:id="@id/android:empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/label_no_data"/>
 
     <android.support.design.widget.FloatingActionButton

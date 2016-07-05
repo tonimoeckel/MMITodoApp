@@ -34,7 +34,7 @@ public class LoginForm {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(SP_KEY_EMAIL, email);
         editor.putString(SP_KEY_PASSWORD, pwd);
-        editor.commit();
+        editor.apply();
 
     }
 }

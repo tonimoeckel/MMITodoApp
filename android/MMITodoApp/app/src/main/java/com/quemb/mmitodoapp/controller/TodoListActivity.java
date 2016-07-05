@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.adapter.ToDoListFragmentsPagingAdapter;
+import com.quemb.mmitodoapp.util.Authentication;
 
 public class TodoListActivity extends TabHostActivity {
 
@@ -40,6 +41,11 @@ public class TodoListActivity extends TabHostActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_todo_list_activity, menu);
+
+        boolean isAuth = Authentication.isAuthenticated();
+        menu.findItem(R.id.action_logout).setVisible(isAuth);
+        menu.findItem(R.id.action_login).setVisible(!isAuth);
+
         return true;
     }
 
@@ -48,9 +54,16 @@ public class TodoListActivity extends TabHostActivity {
 
         int id = item.getItemId();
 
-        if (id == R.id.action_login) {
+        if (id == R.id.action_logout) {
+            Authentication.logout();
             Intent formIntend = new Intent(TodoListActivity.this, LoginActivity.class);
             startActivity(formIntend);
+            finish();
+            return true;
+        }else if (id == R.id.action_login) {
+            Intent formIntend = new Intent(TodoListActivity.this, LoginActivity.class);
+            startActivity(formIntend);
+            finish();
             return true;
         }
 

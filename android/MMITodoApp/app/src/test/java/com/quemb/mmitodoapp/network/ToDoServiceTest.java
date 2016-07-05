@@ -1,6 +1,7 @@
 package com.quemb.mmitodoapp.network;
 
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -91,13 +92,21 @@ public class ToDoServiceTest {
         toDo.setId(5L);
         toDo.setTitle("Test Title");
         toDo.setText("Test Text");
+        toDo.userAddress = "Test Address";
+        toDo.setLatLng(new LatLng(51.050409, 13.737262));
 
         Gson gson = ApplicationController.getGsonObject();
         String jsonString = gson.toJson(toDo);
 
         JsonObject jsonObject = gson.fromJson(jsonString, JsonObject.class);
         assertThat(jsonObject.get("name").getAsString(), equalTo("Test Title"));
-        assertThat(jsonObject.get("description").getAsString(), equalTo("Test Title"));
+        assertThat(jsonObject.get("description").getAsString(), equalTo("Test Text"));
+
+        JsonObject locationElement = jsonObject.get("location").getAsJsonObject();
+        assertThat(locationElement.get("name").getAsString(), equalTo("Test Address"));
+        JsonObject latlngElement = locationElement.get("latlng").getAsJsonObject();
+        assertThat(latlngElement.get("lat").getAsDouble(), equalTo(51.050409));
+        assertThat(latlngElement.get("lng").getAsDouble(), equalTo(13.737262));
 
 
     }

@@ -79,4 +79,14 @@
     <string name="label_no">No</string>
     <string name="tab_title_list">List</string>
     <string name="tab_title_map">Map</string>
+    <string name="toast_connection_setting_is_unvalid">Settings are not valid</string>
+    <string name="label_skip">Skip this step</string>
+    <string name="dialog_please_wait">Please wait...</string>
+    <string name="dialog_login">Login</string>
+    <string name="dialog_connection">Connection Abort</string>
+    <string name="dialog_proceed_without_server_sync">There is no active connection to the host. You are able to proceed, but no you will work local only.</string>
+    <string name="dialog_change_connection_settings">Change connection settings</string>
+    <string name="action_logout">Logout</string>
+    <string name="section_settings">Settings</string>
+    <string name="login_not_successful">Email or Password uncorrect</string>
 </resources>
