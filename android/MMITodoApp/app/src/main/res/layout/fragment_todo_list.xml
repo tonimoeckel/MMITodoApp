@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_todo_list"
     android:orientation="vertical"
@@ -31,4 +31,4 @@
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_note_add_white_24dp" />
 
-</LinearLayout>
+</FrameLayout>

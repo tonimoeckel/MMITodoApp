@@ -173,14 +173,18 @@ public class LoginActivity extends ListActivity implements OnFormRowValueChanged
     @Override
     public void onFormRowClick(FormItemDescriptor itemDescriptor) {
 
+
+        if (itemDescriptor == null || itemDescriptor.getTag() == null){
+            return;
+        }
         //If login button clicked
-        if (itemDescriptor != null && itemDescriptor.getTag().equals(ROW_DESCRIPTOR_TAG_LOGIN)){
+        if (itemDescriptor.getTag().equals(ROW_DESCRIPTOR_TAG_LOGIN)){
 
             if (mFormDescriptor.isValid(this)){
                 processLogin(mLoginForm);
             }
 
-        }else if (itemDescriptor != null && itemDescriptor.getTag().equals(ROW_DESCRIPTOR_TAG_CONNECTION)){
+        }else if (itemDescriptor.getTag().equals(ROW_DESCRIPTOR_TAG_CONNECTION)){
 
             Intent formIntend = new Intent(this, ConnectionSettingsActivity.class);
             startActivity(formIntend);

@@ -57,27 +57,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="696b07e2-1928-40a8-97d8-56b363864160" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/util/TodoJsonSerializer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_connection_settings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/application/ApplicationController.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/application/ApplicationController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/ConnectionSettingsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/ConnectionSettingsActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/LoginActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/LoginActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/StartActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/StartActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoListActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/model/LoginForm.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/model/LoginForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/model/ToDo.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/model/ToDo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/service/SyncAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/service/SyncAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/util/Authentication.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/util/Authentication.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_progress_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_progress_list.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_todo_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_todo_list.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_todo_list_activity.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_todo_list_activity.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/test/java/com/quemb/mmitodoapp/network/ToDoServiceTest.java" afterPath="$PROJECT_DIR$/app/src/test/java/com/quemb/mmitodoapp/network/ToDoServiceTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/QMBForm/src/main/java/com/quemb/qmbform/adapter/FormAdapter.java" afterPath="$PROJECT_DIR$/libs/QMBForm/src/main/java/com/quemb/qmbform/adapter/FormAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/Reachability/reachability.iml" afterPath="$PROJECT_DIR$/libs/Reachability/reachability.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/Reachability/src/main/java/com/quemb/reachability/Reachability.java" afterPath="$PROJECT_DIR$/libs/Reachability/src/main/java/com/quemb/reachability/Reachability.java" />
     </list>
     <ignored path="MMITodoApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -219,8 +201,8 @@
       <file leaf-file-name="LoginActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="215" column="60" selection-start-line="215" selection-start-column="60" selection-end-line="215" selection-end-column="60" />
+            <state relative-caret-position="307">
+              <caret line="186" column="18" selection-start-line="186" selection-start-column="18" selection-end-line="186" selection-end-column="18" />
               <folding>
                 <element signature="e#3351#3387#0" expanded="true" />
                 <element signature="e#3701#3731#0" expanded="true" />
@@ -228,24 +210,42 @@
                 <element signature="e#4343#4344#0" expanded="true" />
                 <element signature="e#6010#6011#0" expanded="true" />
                 <element signature="e#6075#6076#0" expanded="true" />
-                <element signature="e#6938#6970#0" expanded="true" />
-                <element signature="e#6971#7009#0" expanded="true" />
-                <element signature="e#7408#8172#0" expanded="true" />
-                <element signature="e#7820#7852#0" expanded="true" />
-                <element signature="e#8171#8172#0" expanded="true" />
-                <element signature="e#8510#8550#0" expanded="true" />
-                <element signature="e#8653#8684#0" expanded="true" />
+                <element signature="e#6989#7021#0" expanded="true" />
+                <element signature="e#7022#7060#0" expanded="true" />
+                <element signature="e#7459#8223#0" expanded="true" />
+                <element signature="e#7871#7903#0" expanded="true" />
+                <element signature="e#8222#8223#0" expanded="true" />
+                <element signature="e#8561#8601#0" expanded="true" />
+                <element signature="e#8704#8735#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TodoListActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoListActivity.java">
+      <file leaf-file-name="content_todo_list.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_todo_list.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="40" column="40" selection-start-line="40" selection-start-column="40" selection-end-line="40" selection-end-column="40" />
+            <state relative-caret-position="120">
+              <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_todo_list.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_todo_list.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-155">
+              <caret line="0" column="12" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
+              <folding>
+                <element signature="e#879#902#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -265,16 +265,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="181">
               <caret line="161" column="40" selection-start-line="161" selection-start-column="40" selection-end-line="161" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ApplicationController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/application/ApplicationController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="474">
-              <caret line="148" column="45" selection-start-line="148" selection-start-column="30" selection-end-line="148" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -322,7 +312,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ToDoServiceTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ToDoServiceTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/test/java/com/quemb/mmitodoapp/network/ToDoServiceTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="450">
@@ -4593,7 +4583,6 @@
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_progress_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_connection_settings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_todo_list.xml" />
         <option value="$PROJECT_DIR$/libs/QMBForm/src/main/java/com/quemb/qmbform/adapter/FormAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_todo_list_activity.xml" />
@@ -4602,12 +4591,13 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/util/Authentication.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/StartActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/service/SyncAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoListActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/application/ApplicationController.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/util/TodoJsonSerializer.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/model/ToDo.java" />
         <option value="$PROJECT_DIR$/app/src/test/java/com/quemb/mmitodoapp/network/ToDoServiceTest.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_todo_list.xml" />
       </list>
     </option>
   </component>
@@ -5000,6 +4990,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMITodoApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MMITodoApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -5230,7 +5250,7 @@
       <recent name="$PROJECT_DIR$/app/src/main/res" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ToDoServiceTest">
+  <component name="RunManager" selected="Android Application.Start">
     <configuration default="false" name="MMITodoApp [copyResDirectoryToClasses]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -6023,7 +6043,7 @@
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22649573" sideWeight="0.45" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2599681" sideWeight="0.5032258" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3897912" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3897912" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -6037,7 +6057,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32808858" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293461" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3236659" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3236659" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267671" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2599681" sideWeight="0.5032258" order="11" side_tool="true" content_ui="tabs" />
@@ -6322,30 +6342,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_todo_list.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_todo_list.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
-          <folding>
-            <element signature="e#880#903#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/libs/QMBForm/src/main/java/com/quemb/qmbform/descriptor/FormItemDescriptor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -6450,28 +6446,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/LoginActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="215" column="60" selection-start-line="215" selection-start-column="60" selection-end-line="215" selection-end-column="60" />
-          <folding>
-            <element signature="e#3351#3387#0" expanded="true" />
-            <element signature="e#3701#3731#0" expanded="true" />
-            <element signature="e#4085#4344#0" expanded="true" />
-            <element signature="e#4343#4344#0" expanded="true" />
-            <element signature="e#6010#6011#0" expanded="true" />
-            <element signature="e#6075#6076#0" expanded="true" />
-            <element signature="e#6938#6970#0" expanded="true" />
-            <element signature="e#6971#7009#0" expanded="true" />
-            <element signature="e#7408#8172#0" expanded="true" />
-            <element signature="e#7820#7852#0" expanded="true" />
-            <element signature="e#8171#8172#0" expanded="true" />
-            <element signature="e#8510#8550#0" expanded="true" />
-            <element signature="e#8653#8684#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/TodoListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -6543,6 +6517,52 @@
         <state relative-caret-position="450">
           <caret line="108" column="76" selection-start-line="108" selection-start-column="76" selection-end-line="108" selection-end-column="76" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/quemb/mmitodoapp/controller/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="186" column="18" selection-start-line="186" selection-start-column="18" selection-end-line="186" selection-end-column="18" />
+          <folding>
+            <element signature="e#3351#3387#0" expanded="true" />
+            <element signature="e#3701#3731#0" expanded="true" />
+            <element signature="e#4085#4344#0" expanded="true" />
+            <element signature="e#4343#4344#0" expanded="true" />
+            <element signature="e#6010#6011#0" expanded="true" />
+            <element signature="e#6075#6076#0" expanded="true" />
+            <element signature="e#6989#7021#0" expanded="true" />
+            <element signature="e#7022#7060#0" expanded="true" />
+            <element signature="e#7459#8223#0" expanded="true" />
+            <element signature="e#7871#7903#0" expanded="true" />
+            <element signature="e#8222#8223#0" expanded="true" />
+            <element signature="e#8561#8601#0" expanded="true" />
+            <element signature="e#8704#8735#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_todo_list.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_todo_list.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-155">
+          <caret line="0" column="12" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
+          <folding>
+            <element signature="e#879#902#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
