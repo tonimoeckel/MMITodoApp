@@ -25,7 +25,7 @@ public class ToDoLocationPickerFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ToDoMapFragement toDoMapFragement = (ToDoMapFragement) getChildFragmentManager().findFragmentById(R.id.fragment);
+        ToDoMapFragment toDoMapFragement = (ToDoMapFragment) getChildFragmentManager().findFragmentById(R.id.fragment);
 
     }
 }

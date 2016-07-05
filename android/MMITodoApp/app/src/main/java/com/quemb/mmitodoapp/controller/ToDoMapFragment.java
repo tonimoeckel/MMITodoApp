@@ -33,7 +33,7 @@ import static com.quemb.mmitodoapp.config.Constants.SUCCESS_RESULT;
 /**
  * Created by tonimoeckel on 01.07.16.
  */
-public class ToDoMapFragement extends MapFragment implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener{
+public class ToDoMapFragment extends MapFragment implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener{
 
 
     protected Location mLastLocation;
