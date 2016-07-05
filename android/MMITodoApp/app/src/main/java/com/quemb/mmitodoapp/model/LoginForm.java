@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.google.gson.annotations.Expose;
 import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.validator.PasswordValidator;
 import com.quemb.qmbform.annotation.FormElement;
@@ -20,9 +21,11 @@ public class LoginForm {
     private static final String SP_KEY_EMAIL = "SP_KEY_EMAIL";
     private static final String SP_KEY_PASSWORD = "SP_KEY_PASSWORD";
 
+    @Expose
     @FormElement(rowDescriptorType = RowDescriptor.FormRowDescriptorTypeEmailInline, validatorClasses = EmailValidator.class, label = R.string.label_email, tag = "email", sortId = 0, hint = R.string.hint_email)
     public String email = "s@bht.de";
 
+    @Expose
     @FormElement(rowDescriptorType = RowDescriptor.FormRowDescriptorTypePasswordInline, validatorClasses = PasswordValidator.class, label = R.string.label_password, tag = "pwd", sortId = 1)
     public String pwd = "000000";
 

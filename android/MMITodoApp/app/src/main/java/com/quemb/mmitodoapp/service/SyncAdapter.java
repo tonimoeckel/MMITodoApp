@@ -112,7 +112,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     private void performPostSync(long aLong) {
         if (aLong > -1){
             ToDo todo = ToDo.findById(ToDo.class, aLong);
+
             if (todo != null){
+                todo.tmpLocation = todo.createLocationObject();
                 ToDoService todoService = ApplicationController.getSharedInstance().getToDoService();
                 try {
                     todoService.postTodo(todo).execute();
@@ -128,11 +130,14 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     private void performPutSync(long aLong) {
         if (aLong > -1){
             ToDo todo = ToDo.findById(ToDo.class, aLong);
+
             if (todo != null){
+                todo.tmpLocation = todo.createLocationObject();
                 ToDoService todoService = ApplicationController.getSharedInstance().getToDoService();
+                Call<ToDo> call = todoService.putTodo(aLong,todo);
                 try {
-                    todoService.putTodo(aLong,todo).execute();
-                } catch (IOException e) {
+                    call.execute();
+                } catch (IllegalStateException | IOException e) {
                     Log.e(TAG, "Error putting local data to remote", e);
                 }
             }
@@ -201,14 +206,24 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
         ToDoService todoService = ApplicationController.getSharedInstance().getToDoService();
         Iterator<ToDo> localList = ToDo.findAll(ToDo.class);
+
         while (localList.hasNext()){
             ToDo toDo = localList.next();
-            Response<ToDo> response = todoService.postTodo(toDo).execute();
-            if (response.isSuccessful()){
-                Log.d(TAG, "Created " + toDo.getId() + " on remote");
-            }else {
-                Log.e(TAG, response.errorBody().string());
+            toDo.tmpLocation = toDo.createLocationObject();
+            Call<ToDo> call = todoService.postTodo(toDo);
+            try {
+                Response<ToDo> response = call.execute();
+                if (response.isSuccessful()){
+                    Log.d(TAG, "Created " + toDo.getId() + " on remote");
+                }else {
+                    Log.e(TAG, response.errorBody().string());
+                }
             }
+            catch (IllegalStateException e){
+                Log.e(TAG, call.request().body().toString());
+                Log.e(TAG, e.getLocalizedMessage(), e);
+            }
+
         }
 
     }
@@ -222,10 +237,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             List<ToDo> list = response.body();
             Log.d(TAG, "Found " + list.size() + " remote items to remove");
             for (ToDo toDo : list){
-                Log.d(TAG, "Remove Todo: " + toDo.getId());
-                Response<Boolean> deleteResponse = todoService.deleteToDo(toDo.getId()).execute();
+                Log.d(TAG, "Remove Todo: " + toDo.id);
+                Response<Boolean> deleteResponse = todoService.deleteToDo(toDo.id).execute();
                 if (deleteResponse.isSuccessful()){
-                    Log.d(TAG, "Deleted " + toDo.getId() + " on remote");
+                    Log.d(TAG, "Deleted " + toDo.id + " on remote");
                 }else {
                     Log.e(TAG, deleteResponse.errorBody().string());
                 }

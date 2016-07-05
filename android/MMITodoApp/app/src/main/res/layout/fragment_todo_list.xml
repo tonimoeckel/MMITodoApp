@@ -7,21 +7,30 @@
     tools:context="com.quemb.mmitodoapp.controller.TodoListFragment"
     tools:showIn="@layout/activity_todo_list">
 
-    <ListView
-        android:id="@id/android:list"
-        android:drawSelectorOnTop="false"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
-
-    </ListView>
-
-    <TextView android:id="@id/android:empty"
+    <FrameLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/label_no_data"/>
+        tools:context="com.quemb.mmitodoapp.controller.TodoListFragment"
+        tools:showIn="@layout/activity_todo_list">
+
+        <ListView
+            android:id="@id/android:list"
+            android:drawSelectorOnTop="false"
+            android:choiceMode="multipleChoice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+        <TextView android:id="@id/android:empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/label_no_contacts"/>
+
+    </FrameLayout>
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

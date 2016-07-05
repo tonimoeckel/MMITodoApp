@@ -75,6 +75,7 @@
         <relationship name="variablesvalues" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z105"></relationship>
     </object>
     <object type="LMREQUEST" id="z104">
+        <attribute name="clientcertificate" type="string">[{"data":{"mode":0},"identifier":"com.luckymarmot.CertificateDynamicValue"}]</attribute>
         <attribute name="uuid" type="string">A98DC5E2-D314-410E-936E-10104596E4F5</attribute>
         <attribute name="url" type="string">http://localhost:8080/api/todos</attribute>
         <attribute name="storecookies" type="bool">1</attribute>
@@ -83,7 +84,7 @@
         <attribute name="redirectauthorization" type="bool">0</attribute>
         <attribute name="method" type="string">POST</attribute>
         <attribute name="followredirects" type="bool">0</attribute>
-        <attribute name="body" type="string">[{"data":{"json":"{\\"name\\":\\"Paw\\",\\"description\\":\\"Text\\"}"},"identifier":"com.luckymarmot.JSONDynamicValue"}]</attribute>
+        <attribute name="body" type="string">[{"data":{"json":"{\\"name\\":\\"Paw\\",\\"description\\":\\"Text\\",\\"location\\":{\\"name\\":\\"Test\\",\\"latlng\\":{\\"lat\\":12,\\"lng\\":21}}}"},"identifier":"com.luckymarmot.JSONDynamicValue"}]</attribute>
         <attribute name="order" type="int64">1</attribute>
         <attribute name="name" type="string">Post Todo</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM"></relationship>

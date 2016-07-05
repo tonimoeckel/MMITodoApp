@@ -10,13 +10,16 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import com.orm.SugarRecord;
+import com.orm.dsl.Ignore;
 import com.orm.dsl.Table;
 import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.application.ApplicationController;
 import com.quemb.mmitodoapp.service.SyncService;
 import com.quemb.qmbform.annotation.FormElement;
+import com.quemb.qmbform.annotation.FormElementDelegate;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,48 +33,64 @@ import static com.quemb.mmitodoapp.application.ApplicationController.AUTHORITY;
 @Table
 public class ToDo extends SugarRecord {
 
+    @Expose
+    public long id;
 
+    @Expose
     @SerializedName("name")
     @FormElement(required = true, hint = R.string.hint_title, sortId = 0, tag = "title", label = R.string.label_title, rowDescriptorType = RowDescriptor.FormRowDescriptorTypeText)
     public String title;
 
+    @Expose
     @SerializedName("description")
     @FormElement(required = true, hint = R.string.hint_text, sortId = 5, tag = "text", label = R.string.label_text, rowDescriptorType = RowDescriptor.FormRowDescriptorTypeTextView)
     public String text;
 
+    @Expose
     @FormElement(required = true, hint = R.string.hint_done, sortId = 10, tag = "done", label = R.string.label_done, rowDescriptorType = RowDescriptor.FormRowDescriptorTypeBooleanCheck, section = R.string.section_due)
     public Boolean done = false;
 
+    @Expose
     @SerializedName("expiry")
     @FormElement(required = true, hint = R.string.hint_due_date, sortId = 15, tag = "date", label = R.string.label_due_date, rowDescriptorType = RowDescriptor.FormRowDescriptorTypeDatePicker, section = R.string.section_due)
     public Date date = null;
 
-    @Expose(deserialize = false, serialize = false)
-    @FormElement(required = true, hint = R.string.hint_due_time, sortId = 15, tag = "time", label = R.string.label_due_time, rowDescriptorType = RowDescriptor.FormRowDescriptorTypeTime, section = R.string.section_due)
-    public Date time;
-
+    @Expose
     @SerializedName("favourite")
     @FormElement(required = true, hint = R.string.hint_done, sortId = 100, tag = "favorite", label = R.string.label_favorite, rowDescriptorType = RowDescriptor.FormRowDescriptorTypeBooleanCheck, section = R.string.section_more)
     public Boolean favorite = false;
 
-    @Expose(deserialize = false, serialize = false)
     public String userAddress;
 
-    @Expose(deserialize = false, serialize = false)
     public String geocoderAddress;
 
-    @Expose(deserialize = false, serialize = false)
     public Double lat;
 
-    @Expose(deserialize = false, serialize = false)
     public Double lng;
 
+    @Ignore
+    @Expose
+    @SerializedName("location")
+    public Location tmpLocation;
+
+    @Expose
     @SerializedName("contacts")
     @JsonAdapter(JsonStringTypeAdapter.class)
     public String contactsJson;
 
     public ToDo(){
 
+    }
+
+    public Location createLocationObject() {
+
+        Location location = new Location();
+
+        location.name = getPreferredAddress();
+        location.latlng.lat = lat;
+        location.latlng.lng = lng;
+
+        return location;
     }
 
     /**
@@ -127,13 +146,6 @@ public class ToDo extends SugarRecord {
         this.date = date;
     }
 
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
 
     public boolean equals(ToDo toDo){
         return toDo != null && toDo.getId() != null && getId() != null && getId().equals(toDo.getId());
@@ -166,8 +178,8 @@ public class ToDo extends SugarRecord {
 
     public void setLatLng(LatLng latLng){
         if (latLng == null){
-            lat = 0D;
-            lng = 0D;
+            lat = null;
+            lng = null;
         }else {
             lat = latLng.latitude;
             lng = latLng.longitude;
@@ -220,4 +232,5 @@ public class ToDo extends SugarRecord {
 
         return super.delete();
     }
+
 }

@@ -25,6 +25,7 @@ import com.quemb.qmbform.annotation.FormDescriptorAnnotationFactory;
 import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
 import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.SectionDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 
 import java.lang.reflect.Field;
@@ -92,6 +93,9 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
 
         FormDescriptorAnnotationFactory factory = new FormDescriptorAnnotationFactory(getActivity());
         FormDescriptor descriptor = factory.createFormDescriptorFromAnnotatedClass(mTodo);
+
+        SectionDescriptor sectionDescriptor = descriptor.getSectionWithTitle(getString(R.string.section_due));
+        sectionDescriptor.addRow(RowDescriptor.newInstance("date",RowDescriptor.FormRowDescriptorTypeTime, getString(R.string.label_due_time)));
 
         mFormManager = new FormManager();
         mFormManager.setup(descriptor, listView, getActivity());

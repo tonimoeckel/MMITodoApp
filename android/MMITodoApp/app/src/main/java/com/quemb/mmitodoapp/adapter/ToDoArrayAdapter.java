@@ -51,10 +51,8 @@ public class ToDoArrayAdapter extends ArrayAdapter<ToDo> {
         if (item.date != null) {
             SimpleDateFormat formatDate = new SimpleDateFormat("d/MM/yy");
             dueDate = formatDate.format(item.date);
-        }
-        if (item.time != null) {
             SimpleDateFormat formatTime = new SimpleDateFormat("h:mm a");
-            dueTime = formatTime.format(item.time);
+            dueTime = formatTime.format(item.date);
         }
         String formatedDueDateTime = String.format(getContext().getResources().getString(R.string.formated_due_date), dueDate, dueTime);
         dueDateTextView.setText(formatedDueDateTime);
@@ -81,11 +79,11 @@ public class ToDoArrayAdapter extends ArrayAdapter<ToDo> {
             calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(new SimpleDateFormat("d").format(item.date)));
             calendar.set(Calendar.MONTH, Integer.parseInt(new SimpleDateFormat("MM").format(item.date)) - 1);
             calendar.set(Calendar.YEAR, Integer.parseInt(new SimpleDateFormat("yyyy").format(item.date)));
+
+            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(new SimpleDateFormat("HH").format(item.date)));
+            calendar.set(Calendar.MINUTE, Integer.parseInt(new SimpleDateFormat("mm").format(item.date)));
         }
-        if (item.time != null) {
-            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(new SimpleDateFormat("HH").format(item.time)));
-            calendar.set(Calendar.MINUTE, Integer.parseInt(new SimpleDateFormat("mm").format(item.time)));
-        }
+
 
         if (calendar.getTime().before(Calendar.getInstance().getTime()) && !item.done) {
             listItemLinearLayout.setBackgroundColor(0xFFFCE4EC);

@@ -8,6 +8,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.TypeAdapter;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
@@ -24,6 +25,14 @@ public class JsonStringTypeAdapter extends TypeAdapter {
 
     @Override
     public void write(JsonWriter out, Object value) throws IOException {
+
+        Type listOfTestObject = new TypeToken<ArrayList<String>>(){}.getType();
+        ArrayList<String> list = new Gson().fromJson((String) value,listOfTestObject);
+        out.beginArray();
+        for (String item : list) {
+            out.value(item);
+        }
+        out.endArray();
 
     }
 

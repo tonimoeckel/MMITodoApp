@@ -55,12 +55,12 @@ public class ToDoServiceTest {
          */
 
         ToDo toDo = resultList.get(0);
-        assertThat(toDo.getId(), is(0L));
+        assertThat(toDo.id, is(0L));
         assertThat(toDo.title, equalTo("Todo 1467494139111"));
         assertThat(toDo.text, equalTo("lorem ipsum dolor"));
 
         toDo = resultList.get(1);
-        assertThat(toDo.getId(), is(1L));
+        assertThat(toDo.id, is(1L));
         assertThat(toDo.title, equalTo("Todo 1467494139111"));
         assertThat(toDo.text, equalTo("sit amet consectetur"));
 
@@ -72,7 +72,7 @@ public class ToDoServiceTest {
         Gson gson = ApplicationController.getGsonObject();
         ToDo toDo = gson.fromJson(getToDoSampleString1(), ToDo.class);
 
-        assertThat(toDo.getId(), is(1L));
+        assertThat(toDo.id, is(1L));
         assertThat(toDo.title, equalTo("Todo 1467494139111"));
         assertThat(toDo.text, equalTo("sit amet consectetur"));
         assertThat(toDo.done, is(true));
@@ -86,6 +86,39 @@ public class ToDoServiceTest {
     }
 
     @Test
+    public void should_parse_location_todo(){
+
+        Gson gson = ApplicationController.getGsonObject();
+        ToDo toDo = gson.fromJson(getToDoSampleString2(),ToDo.class);
+
+        assertThat(toDo.id, is(599L));
+        assertThat(toDo.title, equalTo("Paw"));
+        assertThat(toDo.text, equalTo("Text"));
+        assertThat(toDo.done, is(false));
+        assertThat(toDo.favorite, is(false));
+
+    }
+
+    private String getToDoSampleString2() {
+        return "{\n" +
+                "  \"id\": 599,\n" +
+                "  \"name\": \"Paw\",\n" +
+                "  \"description\": \"Text\",\n" +
+                "  \"expiry\": 0,\n" +
+                "  \"done\": false,\n" +
+                "  \"favourite\": false,\n" +
+                "  \"contacts\": null,\n" +
+                "  \"location\": {\n" +
+                "    \"name\": \"Test\",\n" +
+                "    \"latlng\": {\n" +
+                "      \"lat\": 12.0,\n" +
+                "      \"lng\": 21.0\n" +
+                "    }\n" +
+                "  }\n" +
+                "}";
+    }
+
+    @Test
     public void should_serialize_to(){
 
         ToDo toDo = new ToDo();
@@ -94,6 +127,7 @@ public class ToDoServiceTest {
         toDo.setText("Test Text");
         toDo.userAddress = "Test Address";
         toDo.setLatLng(new LatLng(51.050409, 13.737262));
+        toDo.tmpLocation = toDo.createLocationObject();
 
         Gson gson = ApplicationController.getGsonObject();
         String jsonString = gson.toJson(toDo);

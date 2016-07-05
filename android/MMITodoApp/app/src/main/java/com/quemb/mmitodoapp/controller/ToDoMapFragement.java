@@ -59,6 +59,34 @@ public class ToDoMapFragement extends MapFragment implements OnMapReadyCallback,
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+    }
+
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        super.onMapReady(googleMap);
+
+        mToDo = ToDoIntentUtils.getToDoFromIntent(getArguments());
+
+        showEmptyContainer();
+
+        mResultReceiver = new AddressResultReceiver(new Handler());
+        googleMap.setOnMapLongClickListener(this);
+
+        if (mToDo.getLatLng() != null){
+            addMarker(mToDo.getLatLng(), mToDo.getPreferredAddress());
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(mToDo.getLatLng(), 10);
+            googleMap.moveCamera(cameraUpdate);
+            displayAddress();
+        }
+
+//        ToDoDetailInfoWindowAdapter adapter = new ToDoDetailInfoWindowAdapter(toDo, getActivity().getLayoutInflater());
+//        adapter.setMarkerActionListener(this);
+//        googleMap.setInfoWindowAdapter(adapter);
+
         getSaveButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,32 +133,6 @@ public class ToDoMapFragement extends MapFragment implements OnMapReadyCallback,
                 showEmptyContainer();
             }
         });
-    }
-
-
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        super.onMapReady(googleMap);
-
-        mToDo = ToDoIntentUtils.getToDoFromIntent(getArguments());
-
-        showEmptyContainer();
-
-        mResultReceiver = new AddressResultReceiver(new Handler());
-        googleMap.setOnMapLongClickListener(this);
-
-        if (mToDo.getLatLng() != null){
-            addMarker(mToDo.getLatLng(), mToDo.getPreferredAddress());
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(mToDo.getLatLng(), 10);
-            googleMap.moveCamera(cameraUpdate);
-            displayAddress();
-        }
-
-//        ToDoDetailInfoWindowAdapter adapter = new ToDoDetailInfoWindowAdapter(toDo, getActivity().getLayoutInflater());
-//        adapter.setMarkerActionListener(this);
-//        googleMap.setInfoWindowAdapter(adapter);
 
     }
 

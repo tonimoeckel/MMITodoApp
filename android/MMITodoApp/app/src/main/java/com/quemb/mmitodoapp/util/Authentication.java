@@ -16,8 +16,15 @@ public class Authentication {
     private static final String SP_KEY_IS_AUTHENTICATED = "SP_KEY_IS_AUTHENTICATED";
 
     public static boolean isAuthenticated(){
+        return isAuthenticated(null);
+    }
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getSharedInstance().getApplicationContext());
+    public static boolean isAuthenticated(Context context){
+
+        if (context == null){
+            context = ApplicationController.getSharedInstance().getApplicationContext();
+        }
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPref.getBoolean(SP_KEY_IS_AUTHENTICATED, false);
         
     }

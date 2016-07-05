@@ -18,14 +18,14 @@ import com.google.gson.JsonSerializer;
 import com.orm.SugarApp;
 import com.quemb.mmitodoapp.model.ConnectionSetting;
 import com.quemb.mmitodoapp.model.ConnectionSettingFactory;
-import com.quemb.mmitodoapp.model.ToDo;
 import com.quemb.mmitodoapp.network.ToDoService;
-import com.quemb.mmitodoapp.util.TodoJsonSerializer;
 
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.util.Date;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -103,8 +103,13 @@ public class ApplicationController extends SugarApp {
 
     public Retrofit createRetrofit(String baseUrl) {
 
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
+                .client(client)
                 .addConverterFactory(GsonConverterFactory.create(getGsonObject()))
                 .build();
     }
@@ -146,14 +151,9 @@ public class ApplicationController extends SugarApp {
         return mToDoService;
     }
 
-    public static GsonBuilder baseGsonBuilder(){
+    public static Gson getGsonObject(){
         return new GsonBuilder()
-                .registerTypeAdapter(String[].class, new JsonDeserializer<String[]>() {
-                    @Override
-                    public String[] deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-                        return new String[0];
-                    }
-                })
+                .excludeFieldsWithoutExposeAnnotation()
                 .registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
                     public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
                         return new Date(json.getAsJsonPrimitive().getAsLong());
@@ -164,12 +164,7 @@ public class ApplicationController extends SugarApp {
                     public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
                         return new JsonPrimitive(src.getTime());
                     }
-                });
-    }
-
-    public static Gson getGsonObject(){
-        return  baseGsonBuilder()
-                .registerTypeAdapter(ToDo.class, new TodoJsonSerializer())
+                })
                 .create();
     }
 }
