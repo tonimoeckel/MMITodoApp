@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.quemb.mmitodoapp">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.quemb.mmitodoapp">
 
 
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
@@ -42,7 +43,8 @@
         <service
             android:name=".service.SyncService"
             android:exported="true"
-            android:process=":sync">
+            android:process=":sync"
+            tools:ignore="ExportedService">
             <intent-filter>
                 <action android:name="android.content.SyncAdapter" />
             </intent-filter>
