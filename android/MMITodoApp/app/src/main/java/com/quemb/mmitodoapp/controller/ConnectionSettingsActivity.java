@@ -113,7 +113,7 @@ public class ConnectionSettingsActivity extends AppCompatActivity implements OnF
 
             ConnectionSetting connectionSetting = ConnectionSettingFactory.getSharedPreferencesSetting(this);
             if (connectionSetting.isValid()){
-                if (Authentication.isAuthenticated()){
+                if (!Authentication.isAuthenticated(this)){
                     startActivity(new Intent(this, LoginActivity.class));
                 }else {
                     startActivity(new Intent(this, TodoListActivity.class));

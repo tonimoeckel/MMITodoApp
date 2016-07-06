@@ -43,7 +43,7 @@ public class StartActivity extends Activity {
                     @Override
                     public void onReachabilityChecked(ReachabilityStatus status) {
                         if (status.equals(ReachabilityStatus.Reachable)){
-                            if (!Authentication.isAuthenticated()) {
+                            if (!Authentication.isAuthenticated(StartActivity.this)) {
                                 startIntent(new Intent(StartActivity.this, LoginActivity.class));
                             }else {
                                 startIntent(new Intent(StartActivity.this, TodoListActivity.class));

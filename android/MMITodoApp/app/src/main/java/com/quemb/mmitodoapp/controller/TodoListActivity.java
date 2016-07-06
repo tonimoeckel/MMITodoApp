@@ -42,7 +42,7 @@ public class TodoListActivity extends TabHostActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_todo_list_activity, menu);
 
-        boolean isAuth = Authentication.isAuthenticated();
+        boolean isAuth = Authentication.isAuthenticated(this);
         menu.findItem(R.id.action_logout).setVisible(isAuth);
         menu.findItem(R.id.action_login).setVisible(!isAuth);
 

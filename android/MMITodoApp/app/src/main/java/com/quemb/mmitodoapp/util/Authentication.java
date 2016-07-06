@@ -56,4 +56,11 @@ public class Authentication {
 
 
     }
+
+    public static SharedPreferences getDefaultSharedPreferencesMultiProcess(
+            Context context) {
+        return context.getSharedPreferences(
+                context.getPackageName() + "_preferences",
+                Context.MODE_MULTI_PROCESS);
+    }
 }

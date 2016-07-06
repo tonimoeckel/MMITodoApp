@@ -82,7 +82,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             return;
         }
 
-        if (!Authentication.isAuthenticated()){
+        if (!Authentication.isAuthenticated(getContext())){
             Log.w(TAG, "Not Authenticated");
             getContext().getContentResolver().notifyChange(Uri.parse("todo://sync/uncomplete"), null, false);
             return;
@@ -196,10 +196,14 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         Response<List<ToDo>> response = callCloudToDoList.execute();
         if (response.isSuccessful()){
             for (ToDo toDo : response.body()){
+                if (toDo.tmpLocation != null){
+                    toDo.lat = toDo.tmpLocation.latlng.lat;
+                    toDo.lng = toDo.tmpLocation.latlng.lng;
+                    toDo.userAddress = toDo.tmpLocation.name;
+                }
                 toDo.save();
             }
         }
-
     }
 
     private void postLocalToRemote() throws IOException {
