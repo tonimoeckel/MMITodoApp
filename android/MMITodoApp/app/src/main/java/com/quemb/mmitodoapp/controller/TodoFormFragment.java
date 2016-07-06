@@ -139,8 +139,14 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
     }
 
     private void removeTodo() {
+
+        if (getActivity() instanceof TodoEventListener){
+            TodoEventListener listener = (TodoEventListener) getActivity();
+            listener.onTodoRemoved(mTodo);
+        }
         mTodo.delete(true);
         getActivity().finish();
+
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
@@ -154,6 +160,15 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
             Field field = mTodo.getClass().getField(rowDescriptor.getTag());
             field.set(mTodo, newValue.getValue());
             mTodo.save(true);
+
+            if (getActivity() instanceof TodoEventListener){
+                TodoEventListener listener = (TodoEventListener) getActivity();
+                if (newItem){
+                    listener.onTodoCreated(mTodo);
+                }else {
+                    listener.onTodoUpdated(mTodo);
+                }
+            }
 
             if (newItem){
                 showRemoveButton();

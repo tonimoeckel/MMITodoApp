@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -12,9 +13,13 @@ import android.view.View;
 
 import com.quemb.mmitodoapp.R;
 import com.quemb.mmitodoapp.adapter.ToDoListFragmentsPagingAdapter;
+import com.quemb.mmitodoapp.model.ToDo;
 import com.quemb.mmitodoapp.util.Authentication;
 
-public class TodoListActivity extends TabHostActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class TodoListActivity extends TabHostActivity implements TodoEventListener {
 
     private static final String TAG = "TodoListActivity";
 
@@ -68,5 +73,46 @@ public class TodoListActivity extends TabHostActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onTodoCreated(ToDo toDo) {
+
+        List<TodoEventListener> list = findTodoEventListener();
+        for (TodoEventListener listener : list){
+            listener.onTodoCreated(toDo);
+        }
+
+    }
+
+    @Override
+    public void onTodoUpdated(ToDo toDo) {
+
+        List<TodoEventListener> list = findTodoEventListener();
+        for (TodoEventListener listener : list){
+            listener.onTodoUpdated(toDo);
+        }
+
+    }
+
+    @Override
+    public void onTodoRemoved(ToDo toDo) {
+        List<TodoEventListener> list = findTodoEventListener();
+        for (TodoEventListener listener : list){
+            listener.onTodoRemoved(toDo);
+        }
+    }
+
+    public List<TodoEventListener> findTodoEventListener(){
+
+        ArrayList<TodoEventListener> list = new ArrayList();
+        for (int i = 0; i<mTodoPagingAdapter.getCount(); i++){
+            Fragment fragment = mTodoPagingAdapter.getItem(i);
+            if (fragment instanceof TodoEventListener){
+                list.add((TodoEventListener) fragment);
+            }
+        }
+        return list;
+
     }
 }

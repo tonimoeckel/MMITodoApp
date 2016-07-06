@@ -1,5 +1,7 @@
 package com.quemb.mmitodoapp.model;
 
+import com.orm.SugarRecord;
+import com.orm.dsl.Table;
 import com.quemb.mmitodoapp.R;
 import com.quemb.qmbform.annotation.FormElement;
 import com.quemb.qmbform.annotation.FormElementDelegate;
@@ -17,7 +19,8 @@ import java.util.List;
  * Created by tonimockel on 19.06.16.
  */
 
-public class ConnectionSetting implements FormElementDelegate {
+@Table
+public class ConnectionSetting extends SugarRecord implements FormElementDelegate {
 
     @FormElement(rowDescriptorType = RowDescriptor.FormRowDescriptorTypeSelectorPickerDialog, required = true, label = R.string.label_protocol, tag = "protocol", sortId = 0, hint = R.string.hint_protocol)
     public String protocol;
@@ -28,6 +31,10 @@ public class ConnectionSetting implements FormElementDelegate {
     @FormElement(rowDescriptorType = RowDescriptor.FormRowDescriptorTypeInteger, required = true, label = R.string.label_port, tag = "port", sortId = 10, hint = R.string.hint_port)
     public Integer port;
 
+    public ConnectionSetting(){
+        protocol = "HTTP";
+        port = 80;
+    }
 
     @Override
     public boolean shouldAddRowDescriptorForField(RowDescriptor rowDescriptor, Field field) {

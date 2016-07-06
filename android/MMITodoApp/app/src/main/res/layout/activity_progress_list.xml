@@ -21,7 +21,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.quemb.mmitodoapp.controller.TodoListActivity">
+    tools:context="com.quemb.mmitodoapp.controller.ConnectionSettingsActivity">
 
     <include layout="@layout/layout_toolbar" />
 

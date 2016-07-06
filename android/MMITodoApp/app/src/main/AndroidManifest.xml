@@ -121,11 +121,6 @@
         </activity>
 
 
-        <activity
-                android:name=".controller.SelectContactListActivity"
-                android:label="@string/activity_contacts">
-        </activity>
-
     </application>
 
 </manifest>

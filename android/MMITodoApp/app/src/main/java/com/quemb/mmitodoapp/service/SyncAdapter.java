@@ -10,11 +10,8 @@ import android.content.SyncResult;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
 
-import com.google.common.collect.Lists;
 import com.quemb.mmitodoapp.application.ApplicationController;
-import com.quemb.mmitodoapp.controller.TodoContactsFragment;
 import com.quemb.mmitodoapp.model.ConnectionSetting;
 import com.quemb.mmitodoapp.model.ConnectionSettingFactory;
 import com.quemb.mmitodoapp.model.ToDo;
@@ -32,8 +29,6 @@ import java.util.concurrent.ExecutionException;
 
 import retrofit2.Call;
 import retrofit2.Response;
-
-import static com.quemb.mmitodoapp.service.SyncService.SYNC_EXTRAS_POST;
 
 /**
  * Created by tonimockel on 02.07.16.
@@ -65,7 +60,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
         Log.w(TAG, "onPerformSync");
 
-        ConnectionSetting connectionSetting = ConnectionSettingFactory.getSharedPreferencesSetting(getContext());
+        ConnectionSetting connectionSetting = ConnectionSettingFactory.getSetting();
         try {
             if (!connectionSetting.isValid()){
                 Log.w(TAG, "No host specified. Aborting sync.");

@@ -2,7 +2,6 @@ package com.quemb.mmitodoapp.controller;
 
 import android.annotation.TargetApi;
 import android.app.ActivityManager;
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -10,7 +9,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Window;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -74,7 +72,7 @@ public class ConnectionSettingsActivity extends AppCompatActivity implements OnF
 
         mListView = (ListView) findViewById(android.R.id.list);
 
-        mConnectionSetting = ConnectionSettingFactory.getSharedPreferencesSetting(this);
+        mConnectionSetting = ConnectionSettingFactory.getSetting();
 
         buildForm();
 
@@ -111,7 +109,7 @@ public class ConnectionSettingsActivity extends AppCompatActivity implements OnF
         if (rowDescriptor.getTag().equals(ROW_DESCRIPTOR_TAG_SAVE)){
             saveConnectionSetting();
 
-            ConnectionSetting connectionSetting = ConnectionSettingFactory.getSharedPreferencesSetting(this);
+            ConnectionSetting connectionSetting = ConnectionSettingFactory.getSetting();
             if (connectionSetting.isValid()){
                 if (!Authentication.isAuthenticated(this)){
                     startActivity(new Intent(this, LoginActivity.class));
@@ -152,7 +150,7 @@ public class ConnectionSettingsActivity extends AppCompatActivity implements OnF
 
     private void saveConnectionSetting() {
 
-        ConnectionSettingFactory.putSharedPreferencesSetting(mConnectionSetting, this);
+        ConnectionSettingFactory.saveSetting(mConnectionSetting);
 
     }
 
