@@ -1,12 +1,14 @@
 package com.quemb.mmitodoapp.controller;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.os.ResultReceiver;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,16 +92,37 @@ public class ToDoMapFragment extends MapFragment implements OnMapReadyCallback, 
         getSaveButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mToDo.geocoderAddress = mGeocoderAddress;
 
-                if (mMarker != null){
-                    mToDo.setLatLng(mMarker.getPosition());
-                }else {
-                    mToDo.setLatLng(null);
-                }
-                mToDo.save(true);
+                new AlertDialog.Builder(getActivity())
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle(getString(R.string.label_save))
+                        .setMessage(getString(R.string.dialog_would_you_like_to_save_this))
+                        .setPositiveButton(getString(R.string.button_yes), new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-                updateButtons();
+                                mToDo.geocoderAddress = mGeocoderAddress;
+
+                                if (mMarker != null){
+                                    mToDo.setLatLng(mMarker.getPosition());
+                                }else {
+                                    mToDo.setLatLng(null);
+                                }
+                                mToDo.save(true);
+
+                                if (getActivity() instanceof TodoEventListener){
+                                    TodoEventListener listener = (TodoEventListener) getActivity();
+                                    listener.onTodoUpdated(mToDo);
+                                }
+
+                                updateButtons();
+
+                            }
+
+                        })
+                        .setNegativeButton(getString(R.string.button_no), null)
+                        .show();
 
             }
         });
@@ -117,6 +140,12 @@ public class ToDoMapFragment extends MapFragment implements OnMapReadyCallback, 
                         }
                         mToDo.save(true);
                         displayAddress();
+
+                        if (getActivity() instanceof TodoEventListener){
+                            TodoEventListener listener = (TodoEventListener) getActivity();
+                            listener.onTodoUpdated(mToDo);
+                        }
+
                     }
                 }).show();
             }
@@ -125,12 +154,35 @@ public class ToDoMapFragment extends MapFragment implements OnMapReadyCallback, 
         getRemoveButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mToDo.userAddress = null;
-                mToDo.geocoderAddress = null;
-                mToDo.setLatLng(null);
-                mMarker = null;
-                getGoogleMap().clear();
-                showEmptyContainer();
+
+                new AlertDialog.Builder(getActivity())
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle(getString(R.string.label_delete))
+                        .setMessage(getString(R.string.dialog_would_you_like_to_remove_this))
+                        .setPositiveButton(getString(R.string.button_yes), new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                mToDo.userAddress = null;
+                                mToDo.geocoderAddress = null;
+                                mToDo.setLatLng(null);
+                                mMarker = null;
+                                mToDo.save();
+                                getGoogleMap().clear();
+                                showEmptyContainer();
+
+                                if (getActivity() instanceof TodoEventListener){
+                                    TodoEventListener listener = (TodoEventListener) getActivity();
+                                    listener.onTodoUpdated(mToDo);
+                                }
+
+                            }
+
+                        })
+                        .setNegativeButton(getString(R.string.button_no), null)
+                        .show();
+
             }
         });
 

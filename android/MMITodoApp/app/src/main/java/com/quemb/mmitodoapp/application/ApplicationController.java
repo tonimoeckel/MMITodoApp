@@ -89,7 +89,7 @@ public class ApplicationController extends SugarApp {
         super.onCreate();
         sharedInstance = this;
 
-        ConnectionSettingFactory.getSharedPreferencesSetting(getApplicationContext());
+        ConnectionSettingFactory.getSetting();
 
         mAccount = CreateSyncAccount(this);
 
@@ -141,7 +141,7 @@ public class ApplicationController extends SugarApp {
     public ToDoService getToDoService() {
 
         if (mToDoService == null){
-            ConnectionSetting connectionSetting = ConnectionSettingFactory.getSharedPreferencesSetting(getApplicationContext());
+            ConnectionSetting connectionSetting = ConnectionSettingFactory.getSetting();
             try {
                 mToDoService = createToDoService(connectionSetting.getURL().toString());
             } catch (MalformedURLException e) {

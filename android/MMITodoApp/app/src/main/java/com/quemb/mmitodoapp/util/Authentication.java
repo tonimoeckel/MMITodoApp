@@ -5,7 +5,12 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.quemb.mmitodoapp.application.ApplicationController;
+import com.quemb.mmitodoapp.model.Session;
 import com.quemb.mmitodoapp.model.ToDo;
+
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by tonimockel on 22.06.16.
@@ -13,30 +18,25 @@ import com.quemb.mmitodoapp.model.ToDo;
 
 public class Authentication {
 
-    private static final String SP_KEY_IS_AUTHENTICATED = "SP_KEY_IS_AUTHENTICATED";
-
     public static boolean isAuthenticated(){
         return isAuthenticated(null);
     }
 
     public static boolean isAuthenticated(Context context){
 
-        if (context == null){
-            context = ApplicationController.getSharedInstance().getApplicationContext();
-        }
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPref.getBoolean(SP_KEY_IS_AUTHENTICATED, false);
+        List<Session> list = Session.find(Session.class, "authenticated = ?", "1");
+        return list.size() > 0;
         
     }
 
     public static void setAuthenticated(){
 
+        Session.deleteAll(Session.class);
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getSharedInstance().getApplicationContext());
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putBoolean(SP_KEY_IS_AUTHENTICATED, true);
-
-        editor.apply();
+        Session session = new Session();
+        session.loginDate = new Date();
+        session.authenticated = true;
+        session.save();
 
         ApplicationController.getSharedInstance().triggerSync();
 
@@ -46,21 +46,11 @@ public class Authentication {
 
     public static void logout() {
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getSharedInstance().getApplicationContext());
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putBoolean(SP_KEY_IS_AUTHENTICATED, false);
-
-        editor.apply();
-
+        Session.deleteAll(Session.class);
         ToDo.deleteAll(ToDo.class);
 
 
     }
 
-    public static SharedPreferences getDefaultSharedPreferencesMultiProcess(
-            Context context) {
-        return context.getSharedPreferences(
-                context.getPackageName() + "_preferences",
-                Context.MODE_MULTI_PROCESS);
-    }
+
 }

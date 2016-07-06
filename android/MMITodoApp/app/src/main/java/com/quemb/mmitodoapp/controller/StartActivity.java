@@ -29,7 +29,7 @@ public class StartActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ConnectionSetting connectionSetting = ConnectionSettingFactory.getSharedPreferencesSetting(this);
+        ConnectionSetting connectionSetting = ConnectionSettingFactory.getSetting();
 
 
         if (!connectionSetting.isValid()) {
