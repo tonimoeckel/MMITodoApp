@@ -29,6 +29,7 @@ import com.quemb.qmbform.descriptor.SectionDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 
 import java.lang.reflect.Field;
+import java.util.Date;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -91,18 +92,22 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
 
         ListView listView = (ListView) view.findViewById(R.id.listview);
 
+        mFormManager = createForm(mTodo, listView);
+
+    }
+
+    protected FormManager createForm(ToDo todo, ListView listView) {
         FormDescriptorAnnotationFactory factory = new FormDescriptorAnnotationFactory(getActivity());
-        FormDescriptor descriptor = factory.createFormDescriptorFromAnnotatedClass(mTodo);
+        FormDescriptor descriptor = factory.createFormDescriptorFromAnnotatedClass(todo);
 
         SectionDescriptor sectionDescriptor = descriptor.getSectionWithTitle(getString(R.string.section_due));
-        sectionDescriptor.addRow(RowDescriptor.newInstance("date",RowDescriptor.FormRowDescriptorTypeTime, getString(R.string.label_due_time)));
+        sectionDescriptor.addRow(RowDescriptor.newInstance("date",RowDescriptor.FormRowDescriptorTypeTime, getString(R.string.label_due_time), new Value<Date>(todo.date)));
 
-        mFormManager = new FormManager();
-        mFormManager.setup(descriptor, listView, getActivity());
-        mFormManager.setOnFormRowValueChangedListener(this);
+        FormManager formManager = new FormManager();
+        formManager.setup(descriptor, listView, getActivity());
+        formManager.setOnFormRowValueChangedListener(this);
 
-        Log.d(TAG, listView.toString());
-
+        return formManager;
     }
 
     private void showRemoveButton() {
@@ -191,6 +196,10 @@ public class TodoFormFragment extends Fragment implements OnFormRowValueChangedL
             e.printStackTrace();
         }
 
+    }
+
+    public FormManager getFormManager() {
+        return mFormManager;
     }
 
 

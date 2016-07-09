@@ -44,14 +44,15 @@ public class ToDoListFragmentsPagingAdapter extends FragmentPagerAdapter {
 
         FragmentTabItem fragmentTab = mFragmentTabItems.get(position);
         if (fragmentTab != null){
+
+
+
             Class<? extends Fragment> fragmentClass = fragmentTab.getFragmentClass();
 
             Fragment fragment = null;
             try {
 
                 fragment = fragmentClass.newInstance();
-                Bundle args = new Bundle();
-                fragment.setArguments(args);
 
             } catch (InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();

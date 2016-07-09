@@ -1,6 +1,7 @@
 package com.quemb.qmbform.view;
 
 import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.Value;
 
 import android.content.Context;
 
@@ -15,6 +16,13 @@ public class FormTimeFieldCell extends FormDateFieldCell {
     public FormTimeFieldCell(Context context,
                              RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
+    }
+
+    public void onDateChanged(Date date) {
+
+        updateDateLabel(date);
+        onValueChanged(new Value<Date>(date));
+
     }
 
 

@@ -32,9 +32,6 @@ public class TodoListFragment extends ListFragment {
 
     private Boolean mSortByFavorite = true;
 
-    public TodoListFragment() {
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

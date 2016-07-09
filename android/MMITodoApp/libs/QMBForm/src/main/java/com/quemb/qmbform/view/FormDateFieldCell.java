@@ -17,6 +17,7 @@ import java.util.Date;
 public class FormDateFieldCell extends FormDetailTextInlineFieldCell {
 
     private TextView mTextView;
+    private Date mOrgDate;
 
     public FormDateFieldCell(Context context,
                              RowDescriptor rowDescriptor) {
@@ -47,6 +48,9 @@ public class FormDateFieldCell extends FormDetailTextInlineFieldCell {
         if (value == null || value.getValue() == null) {
             value = new Value<Date>(new Date());
         } else {
+            if (mOrgDate == null){
+                mOrgDate = value.getValue();
+            }
             updateDateLabel(value.getValue());
         }
 
@@ -70,9 +74,19 @@ public class FormDateFieldCell extends FormDetailTextInlineFieldCell {
 
     public void onDateChanged(Date date) {
 
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(year, monthOfYear, dayOfMonth);
-//        Date date = new Date(calendar.getTimeInMillis());
+        if (mOrgDate != null){
+            Calendar orgCalendar = Calendar.getInstance();
+            orgCalendar.setTime(mOrgDate);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            calendar.set(Calendar.SECOND, orgCalendar.get(Calendar.SECOND));
+            calendar.set(Calendar.MINUTE, orgCalendar.get(Calendar.MINUTE));
+            calendar.set(Calendar.HOUR, orgCalendar.get(Calendar.HOUR));
+
+            date = calendar.getTime();
+
+        }
 
         updateDateLabel(date);
 

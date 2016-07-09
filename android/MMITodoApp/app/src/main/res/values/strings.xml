@@ -94,4 +94,5 @@
     <string name="button_no">No</string>
     <string name="label_delete">Delete</string>
     <string name="dialog_would_you_like_to_remove_this">Would you like to remove this?</string>
+    <string name="label_no_to_dos">No todos yet</string>
 </resources>

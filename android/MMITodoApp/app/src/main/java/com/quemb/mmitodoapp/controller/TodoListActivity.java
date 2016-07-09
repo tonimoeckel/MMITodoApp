@@ -23,11 +23,14 @@ public class TodoListActivity extends TabHostActivity implements TodoEventListen
 
     private static final String TAG = "TodoListActivity";
 
+
+
     private ToDoListFragmentsPagingAdapter mTodoPagingAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         mTodoPagingAdapter = new ToDoListFragmentsPagingAdapter(getSupportFragmentManager(), this);
@@ -114,5 +117,9 @@ public class TodoListActivity extends TabHostActivity implements TodoEventListen
         }
         return list;
 
+    }
+
+    public ToDoListFragmentsPagingAdapter getTodoPagingAdapter() {
+        return mTodoPagingAdapter;
     }
 }

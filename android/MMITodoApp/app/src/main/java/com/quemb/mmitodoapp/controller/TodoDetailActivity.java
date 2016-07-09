@@ -20,6 +20,8 @@ public class TodoDetailActivity extends TabHostActivity implements ToDoListener 
 
     private static final String TAG = "TodoDetailActivity";
 
+
+
     private ToFragmentsPagingAdapter mTodoPagingAdapter;
 
     @Override
@@ -41,7 +43,7 @@ public class TodoDetailActivity extends TabHostActivity implements ToDoListener 
 
     }
 
-    private long fetchToDoId() {
+    long fetchToDoId() {
 
         long extraId = getIntent().getLongExtra(ToDoIntentUtils.INTENT_EXTRA_TODO_ID, -1);
 
@@ -73,5 +75,9 @@ public class TodoDetailActivity extends TabHostActivity implements ToDoListener 
 
 
 
+    }
+
+    public ToFragmentsPagingAdapter getTodoPagingAdapter() {
+        return mTodoPagingAdapter;
     }
 }
