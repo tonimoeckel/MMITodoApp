@@ -33,3 +33,6 @@ captures/
 
 # Android Studio folder
 .idea/
+
+# extract files from webservice
+webservice/.extract
