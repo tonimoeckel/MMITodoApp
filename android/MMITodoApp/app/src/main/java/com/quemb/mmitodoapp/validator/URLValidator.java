@@ -12,7 +12,7 @@ import com.quemb.qmbform.descriptor.Value;
 
 
 public class URLValidator implements FormValidator {
-    private static final String PASSWORD_PATTERN = "^[0-9]{6}$";
+    private static final String URL_PATTERN = "^[0-9]{6}$";
 
     @Override
     public RowValidationError validate(RowDescriptor descriptor) {
@@ -22,7 +22,7 @@ public class URLValidator implements FormValidator {
         Value value = descriptor.getValue();
         if (value.getValue() != null && value.getValue() instanceof String) {
             String val = (String) value.getValue();
-            if (!val.matches(PASSWORD_PATTERN)){
+            if (!val.matches(URL_PATTERN)){
                 result = new RowValidationError(descriptor, R.string.validation_invalid_password);
             }
         }else {
