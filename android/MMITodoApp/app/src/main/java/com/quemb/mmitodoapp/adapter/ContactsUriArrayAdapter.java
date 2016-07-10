@@ -28,10 +28,9 @@ public class ContactsUriArrayAdapter extends ArrayAdapter<String> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        String uriString = getItem(position);
+        String contactId = getItem(position);
 
-        Uri uri = Uri.parse(uriString);
-        ContactFetcher contactFetcher = new ContactFetcher(getContext(), uri);
+        ContactFetcher contactFetcher = new ContactFetcher(getContext(), contactId);
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.contact_list_item, parent, false);

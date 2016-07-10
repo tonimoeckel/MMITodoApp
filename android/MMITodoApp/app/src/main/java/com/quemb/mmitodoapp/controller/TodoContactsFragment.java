@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -205,16 +206,22 @@ public class TodoContactsFragment extends ListFragment {
             if (resultCode == Activity.RESULT_OK) {
 
                 Uri uri = data.getData();
-                ArrayList<String> contacts = mTodo.getContacts();
-                if (!contacts.contains(uri.toString())) {
-                    contacts.add(uri.toString());
-                    mTodo.setContacts(contacts);
-                    mTodo.save(true);
+                Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
+                if (cursor.moveToFirst()) {
+                    int contactId = cursor.getColumnIndex(ContactsContract.Contacts._ID);
+                    String contactIdString = cursor.getString(contactId);
+                    ArrayList<String> contacts = mTodo.getContacts();
+                    if (!contacts.contains(contactIdString)) {
+                        contacts.add(contactIdString);
+                        mTodo.setContacts(contacts);
+                        mTodo.save(true);
 
-                    ContactsUriArrayAdapter arrayAdapter = (ContactsUriArrayAdapter) getListAdapter();
-                    arrayAdapter.add(uri.toString());
-                    arrayAdapter.notifyDataSetChanged();
+                        ContactsUriArrayAdapter arrayAdapter = (ContactsUriArrayAdapter) getListAdapter();
+                        arrayAdapter.add(contactIdString);
+                        arrayAdapter.notifyDataSetChanged();
+                    }
                 }
+                cursor.close();
 
             }
         }
@@ -226,19 +233,18 @@ public class TodoContactsFragment extends ListFragment {
 
         if (!mEditMode){
 
-            String uriString = (String) getListAdapter().getItem(position);
+            String contactId = (String) getListAdapter().getItem(position);
 //            ContactsContract.QuickContact.showQuickContact(getContext(), v, Uri.parse(uriString),null, null);
 
-            Uri uri = Uri.parse(uriString);
-            openActionDialog(uri);
+            openActionDialog(contactId);
 
         }
 
     }
 
-    private void openActionDialog(final Uri uri){
+    private void openActionDialog(final String contactId){
 
-        ContactFetcher contactFetcher = new ContactFetcher(getContext(), uri);
+        ContactFetcher contactFetcher = new ContactFetcher(getContext(), contactId);
 
         ArrayList<String> titles = new ArrayList<>();
         final ArrayList<Integer> actions = new ArrayList<>();
@@ -262,10 +268,10 @@ public class TodoContactsFragment extends ListFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (actions.get(which)){
                             case ACTION_SEND_EMAIL:
-                                sendMailAction(uri);
+                                sendMailAction(contactId);
                                 break;
                             case ACTION_SEND_SMS:
-                                callPhoneAction(uri);
+                                callPhoneAction(contactId);
                                 break;
                             default:
                                 break;
@@ -278,9 +284,9 @@ public class TodoContactsFragment extends ListFragment {
 
     }
 
-    private void callPhoneAction(Uri uri) {
+    private void callPhoneAction(String contactId) {
 
-        ContactFetcher contactFetcher = new ContactFetcher(getContext(), uri);
+        ContactFetcher contactFetcher = new ContactFetcher(getContext(), contactId);
 
         String msg = "";
         if (mTodo.title != null){
@@ -300,15 +306,19 @@ public class TodoContactsFragment extends ListFragment {
 
     }
 
-    private void sendMailAction(Uri uri) {
+    private void sendMailAction(String contactId) {
 
-        ContactFetcher contactFetcher = new ContactFetcher(getContext(), uri);
+        ContactFetcher contactFetcher = new ContactFetcher(getContext(), contactId);
+
+        String email = contactFetcher.getEmail();
+
+        Log.d(TAG, "send mail to "+email);
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
         intent.putExtra(Intent.EXTRA_SUBJECT, mTodo.title);
         intent.putExtra(Intent.EXTRA_TEXT, mTodo.text);
-        intent.putExtra(Intent.EXTRA_EMAIL, contactFetcher.getEmail());
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
 
         try {
             startActivity(Intent.createChooser(intent, getString(R.string.text_send_email)));
