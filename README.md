@@ -1,9 +1,4 @@
 # MMITodoApp
-## Teilnehmer
-| Name           | Matrikelnummer |
-| -------------- | -------------- |
-| Stefan Meschke | S843228        |
-| Toni Möckel    | S843227        |
 
 ## Struktur
 - **android**: Android Projekt
